@@ -1,6 +1,7 @@
 import 'package:fin_flow/core/theme/app_theme.dart';
-import 'package:fin_flow/features/home/presentation/bloc_and_cubits/cubit/add_transaction_sheet_cubit.dart';
+import 'package:fin_flow/features/home/presentation/bloc_and_cubits/add_transaction_sheet_cubit/add_transaction_sheet_cubit.dart';
 import 'package:fin_flow/features/home/presentation/pages/home_screen.dart';
+import 'package:fin_flow/features/splash/presentation/pages/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -23,10 +24,9 @@ class FinFlowApp extends StatelessWidget {
         //   create: (context) => SubjectBloc(),
         // ),
       ],
-    
       child: MaterialApp(
         theme: AppTheme.theme,
-        home: HomeScreen(),
+        home: SplashScreen(),
       ),
     );
   }
