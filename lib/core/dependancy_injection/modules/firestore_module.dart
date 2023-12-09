@@ -4,5 +4,5 @@ import 'package:injectable/injectable.dart';
 @module
 abstract class FirestoreModule {
   @lazySingleton
-  FirebaseFirestore get firestore => FirebaseFirestore.instance;
+  CollectionReference get firestore => FirebaseFirestore.instance.collection('FinFlowDataBase');
 }
