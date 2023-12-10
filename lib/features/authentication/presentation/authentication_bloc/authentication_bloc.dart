@@ -12,13 +12,13 @@ part 'authentication_bloc.freezed.dart';
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
   final AuthUseCase authUseCase;
-  AuthenticationBloc(this.authUseCase) : super(_Initial()) {
+  AuthenticationBloc(this.authUseCase) : super(AuthenticationState.inital()) {
     on<GoogleSignIn>((event, emit) async {
       await authUseCase(NoParams()).then((value) {
         value.fold((fail) {
-          print("${fail.error} from bloc");
+          emit(state.copyWith(isLoginSuccess: false, err: fail.error));
         }, (success) {
-          print("$success from bloc");
+          emit(state.copyWith(isLoginSuccess: true, err: null));
         });
       });
     });

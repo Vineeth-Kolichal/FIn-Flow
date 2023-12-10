@@ -1,7 +1,10 @@
 import 'dart:async';
 
+import 'package:fin_flow/features/authentication/presentation/pages/login_screen.dart';
 import 'package:fin_flow/features/home/presentation/pages/home_screen.dart';
+import 'package:fin_flow/features/splash/presentation/cubit/splash_screen_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -9,14 +12,23 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      Timer(const Duration(seconds: 3), () {
-        Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (ctx) => const HomeScreen()));
-      });
+      context.read<SplashScreenCubit>().isLoggedIn();
     });
-    return Scaffold(
-      body: Center(
-        child: Text("FinFlow"),
+    return BlocListener<SplashScreenCubit, SplashScreenState>(
+      listener: (context, state) {
+        if (state.isLoaggedIn == true) {
+          Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (ctx) => const HomeScreen()));
+        }
+        if (state.isLoaggedIn == false) {
+          Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (ctx) => const LoginScreen()));
+        }
+      },
+      child: Scaffold(
+        body: Center(
+          child: Text("FinFlow"),
+        ),
       ),
     );
   }

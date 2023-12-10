@@ -4,6 +4,7 @@ import 'package:fin_flow/features/authentication/presentation/authentication_blo
 import 'package:fin_flow/features/authentication/presentation/pages/login_screen.dart';
 import 'package:fin_flow/features/home/presentation/bloc_and_cubits/add_transaction_sheet_cubit/add_transaction_sheet_cubit.dart';
 import 'package:fin_flow/features/home/presentation/pages/home_screen.dart';
+import 'package:fin_flow/features/splash/presentation/cubit/splash_screen_cubit.dart';
 import 'package:fin_flow/features/splash/presentation/pages/splash_screen.dart';
 import 'package:fin_flow/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -32,10 +33,13 @@ class FinFlowApp extends StatelessWidget {
         BlocProvider(
           create: (context) => getIt<AuthenticationBloc>(),
         ),
+        BlocProvider(
+          create: (context) => SplashScreenCubit(),
+        ),
       ],
       child: MaterialApp(
         theme: AppTheme.theme,
-        home: LoginScreen(),
+        home: SplashScreen(),
       ),
     );
   }
