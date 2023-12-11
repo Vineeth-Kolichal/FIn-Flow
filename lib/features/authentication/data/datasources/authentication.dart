@@ -34,9 +34,9 @@ class AuthDataSourceImpl implements AuthDataSource {
             collectionRef.doc(uid).set({
               "email": userCred.user?.email,
             }).then((_) async {
-              final inRef = collectionRef.doc(uid).collection('Categories');
-
-              List<Map<String, dynamic>> incomeCat = [
+              final categoryRef =
+                  collectionRef.doc(uid).collection('Categories');
+              List<Map<String, dynamic>> defaultCategories = [
                 {"type": "income", "name": "Salary"},
                 {"type": "income", "name": "Profit"},
                 {"type": "income", "name": "Credit"},
@@ -47,9 +47,8 @@ class AuthDataSourceImpl implements AuthDataSource {
                 {"type": "expence", "name": "Misc"},
                 {"type": "expence", "name": "Shopping"},
               ];
-
-              for (var cat in incomeCat) {
-                await inRef.add(cat);
+              for (var cat in defaultCategories) {
+                await categoryRef.add(cat);
               }
             });
           }
