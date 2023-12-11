@@ -32,8 +32,30 @@ class AuthDataSourceImpl implements AuthDataSource {
           final docSnap = await collectionRef.doc(uid).get();
           if (docSnap.exists == false) {
             collectionRef.doc(uid).set({
-              "incomeCategory": {"1": "Salary", "2": "Profit", "3": "Divident"},
-              "expenceCategory": {"1": "Rent", "2": "Food", "3": "Travel"}
+              "email": userCred.user?.email,
+            }).then((_) async {
+              final inRef =
+                  collectionRef.doc(uid).collection('income-categories');
+              final exRef =
+                  collectionRef.doc(uid).collection('expence-categories');
+              List<Map<String, dynamic>> incomeCat = [
+                {"category-name": "Salary"},
+                {"category-name": "Profit"},
+                {"category-name": "Credit"},
+                {"category-name": "Other"},
+              ];
+              List<Map<String, dynamic>> expenceCat = [
+                {"category-name": "Rent"},
+                {"category-name": "Food"},
+                {"category-name": "Travel"},
+                {"category-name": "Misc"},
+              ];
+              for (var cat in incomeCat) {
+                await inRef.add(cat);
+              }
+              for (var cat in expenceCat) {
+                await exRef.add(cat);
+              }
             });
           }
         }
