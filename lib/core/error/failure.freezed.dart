@@ -20,32 +20,38 @@ mixin _$Failure {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String error) authError,
+    required TResult Function(String error) dataGetFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String error)? authError,
+    TResult? Function(String error)? dataGetFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String error)? authError,
+    TResult Function(String error)? dataGetFailure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(AuthError value) authError,
+    required TResult Function(DataGetFailure value) dataGetFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AuthError value)? authError,
+    TResult? Function(DataGetFailure value)? dataGetFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AuthError value)? authError,
+    TResult Function(DataGetFailure value)? dataGetFailure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -153,6 +159,7 @@ class _$AuthErrorImpl implements AuthError {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String error) authError,
+    required TResult Function(String error) dataGetFailure,
   }) {
     return authError(error);
   }
@@ -161,6 +168,7 @@ class _$AuthErrorImpl implements AuthError {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String error)? authError,
+    TResult? Function(String error)? dataGetFailure,
   }) {
     return authError?.call(error);
   }
@@ -169,6 +177,7 @@ class _$AuthErrorImpl implements AuthError {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String error)? authError,
+    TResult Function(String error)? dataGetFailure,
     required TResult orElse(),
   }) {
     if (authError != null) {
@@ -181,6 +190,7 @@ class _$AuthErrorImpl implements AuthError {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(AuthError value) authError,
+    required TResult Function(DataGetFailure value) dataGetFailure,
   }) {
     return authError(this);
   }
@@ -189,6 +199,7 @@ class _$AuthErrorImpl implements AuthError {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AuthError value)? authError,
+    TResult? Function(DataGetFailure value)? dataGetFailure,
   }) {
     return authError?.call(this);
   }
@@ -197,6 +208,7 @@ class _$AuthErrorImpl implements AuthError {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AuthError value)? authError,
+    TResult Function(DataGetFailure value)? dataGetFailure,
     required TResult orElse(),
   }) {
     if (authError != null) {
@@ -214,5 +226,143 @@ abstract class AuthError implements Failure {
   @override
   @JsonKey(ignore: true)
   _$$AuthErrorImplCopyWith<_$AuthErrorImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$DataGetFailureImplCopyWith<$Res>
+    implements $FailureCopyWith<$Res> {
+  factory _$$DataGetFailureImplCopyWith(_$DataGetFailureImpl value,
+          $Res Function(_$DataGetFailureImpl) then) =
+      __$$DataGetFailureImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String error});
+}
+
+/// @nodoc
+class __$$DataGetFailureImplCopyWithImpl<$Res>
+    extends _$FailureCopyWithImpl<$Res, _$DataGetFailureImpl>
+    implements _$$DataGetFailureImplCopyWith<$Res> {
+  __$$DataGetFailureImplCopyWithImpl(
+      _$DataGetFailureImpl _value, $Res Function(_$DataGetFailureImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? error = null,
+  }) {
+    return _then(_$DataGetFailureImpl(
+      null == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$DataGetFailureImpl implements DataGetFailure {
+  _$DataGetFailureImpl(this.error);
+
+  @override
+  final String error;
+
+  @override
+  String toString() {
+    return 'Failure.dataGetFailure(error: $error)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$DataGetFailureImpl &&
+            (identical(other.error, error) || other.error == error));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, error);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$DataGetFailureImplCopyWith<_$DataGetFailureImpl> get copyWith =>
+      __$$DataGetFailureImplCopyWithImpl<_$DataGetFailureImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String error) authError,
+    required TResult Function(String error) dataGetFailure,
+  }) {
+    return dataGetFailure(error);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String error)? authError,
+    TResult? Function(String error)? dataGetFailure,
+  }) {
+    return dataGetFailure?.call(error);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String error)? authError,
+    TResult Function(String error)? dataGetFailure,
+    required TResult orElse(),
+  }) {
+    if (dataGetFailure != null) {
+      return dataGetFailure(error);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(AuthError value) authError,
+    required TResult Function(DataGetFailure value) dataGetFailure,
+  }) {
+    return dataGetFailure(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(AuthError value)? authError,
+    TResult? Function(DataGetFailure value)? dataGetFailure,
+  }) {
+    return dataGetFailure?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(AuthError value)? authError,
+    TResult Function(DataGetFailure value)? dataGetFailure,
+    required TResult orElse(),
+  }) {
+    if (dataGetFailure != null) {
+      return dataGetFailure(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class DataGetFailure implements Failure {
+  factory DataGetFailure(final String error) = _$DataGetFailureImpl;
+
+  @override
+  String get error;
+  @override
+  @JsonKey(ignore: true)
+  _$$DataGetFailureImplCopyWith<_$DataGetFailureImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

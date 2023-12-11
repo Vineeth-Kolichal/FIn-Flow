@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$AddTransactionSheetState {
   List<String> get categories => throw _privateConstructorUsedError;
   String? get selected => throw _privateConstructorUsedError;
+  String? get err => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AddTransactionSheetStateCopyWith<AddTransactionSheetState> get copyWith =>
@@ -30,7 +31,7 @@ abstract class $AddTransactionSheetStateCopyWith<$Res> {
           $Res Function(AddTransactionSheetState) then) =
       _$AddTransactionSheetStateCopyWithImpl<$Res, AddTransactionSheetState>;
   @useResult
-  $Res call({List<String> categories, String? selected});
+  $Res call({List<String> categories, String? selected, String? err});
 }
 
 /// @nodoc
@@ -49,6 +50,7 @@ class _$AddTransactionSheetStateCopyWithImpl<$Res,
   $Res call({
     Object? categories = null,
     Object? selected = freezed,
+    Object? err = freezed,
   }) {
     return _then(_value.copyWith(
       categories: null == categories
@@ -58,6 +60,10 @@ class _$AddTransactionSheetStateCopyWithImpl<$Res,
       selected: freezed == selected
           ? _value.selected
           : selected // ignore: cast_nullable_to_non_nullable
+              as String?,
+      err: freezed == err
+          ? _value.err
+          : err // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -71,7 +77,7 @@ abstract class _$$InitialImplCopyWith<$Res>
       __$$InitialImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<String> categories, String? selected});
+  $Res call({List<String> categories, String? selected, String? err});
 }
 
 /// @nodoc
@@ -87,6 +93,7 @@ class __$$InitialImplCopyWithImpl<$Res>
   $Res call({
     Object? categories = null,
     Object? selected = freezed,
+    Object? err = freezed,
   }) {
     return _then(_$InitialImpl(
       categories: null == categories
@@ -97,6 +104,10 @@ class __$$InitialImplCopyWithImpl<$Res>
           ? _value.selected
           : selected // ignore: cast_nullable_to_non_nullable
               as String?,
+      err: freezed == err
+          ? _value.err
+          : err // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -105,7 +116,9 @@ class __$$InitialImplCopyWithImpl<$Res>
 
 class _$InitialImpl implements _Initial {
   const _$InitialImpl(
-      {required final List<String> categories, required this.selected})
+      {required final List<String> categories,
+      required this.selected,
+      required this.err})
       : _categories = categories;
 
   final List<String> _categories;
@@ -118,10 +131,12 @@ class _$InitialImpl implements _Initial {
 
   @override
   final String? selected;
+  @override
+  final String? err;
 
   @override
   String toString() {
-    return 'AddTransactionSheetState(categories: $categories, selected: $selected)';
+    return 'AddTransactionSheetState(categories: $categories, selected: $selected, err: $err)';
   }
 
   @override
@@ -132,12 +147,13 @@ class _$InitialImpl implements _Initial {
             const DeepCollectionEquality()
                 .equals(other._categories, _categories) &&
             (identical(other.selected, selected) ||
-                other.selected == selected));
+                other.selected == selected) &&
+            (identical(other.err, err) || other.err == err));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_categories), selected);
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(_categories), selected, err);
 
   @JsonKey(ignore: true)
   @override
@@ -149,12 +165,15 @@ class _$InitialImpl implements _Initial {
 abstract class _Initial implements AddTransactionSheetState {
   const factory _Initial(
       {required final List<String> categories,
-      required final String? selected}) = _$InitialImpl;
+      required final String? selected,
+      required final String? err}) = _$InitialImpl;
 
   @override
   List<String> get categories;
   @override
   String? get selected;
+  @override
+  String? get err;
   @override
   @JsonKey(ignore: true)
   _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>

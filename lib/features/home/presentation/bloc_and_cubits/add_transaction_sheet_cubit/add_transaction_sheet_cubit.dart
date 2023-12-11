@@ -1,23 +1,34 @@
 import 'package:bloc/bloc.dart';
+import 'package:fin_flow/features/home/domain/usecases/get_categories_usecase.dart';
 import 'package:fin_flow/features/home/presentation/pages/home_screen.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
 
 part 'add_transaction_sheet_state.dart';
 part 'add_transaction_sheet_cubit.freezed.dart';
 
+@injectable
 class AddTransactionSheetCubit extends Cubit<AddTransactionSheetState> {
-  AddTransactionSheetCubit() : super(AddTransactionSheetState.initial());
+  GetCategoriesUseCase getCategoriesUseCase;
+  AddTransactionSheetCubit(this.getCategoriesUseCase)
+      : super(AddTransactionSheetState.initial());
   void getCategories(TransactionType type) {
-    List<String> categories;
-    // emit(state.copyWith(type: type));
-    final income = ["Salary", "Profit", "Divident"];
-    final expence = ["Food", "Travel", "Shopping"];
     if (type == TransactionType.income) {
-      categories = income;
-      emit(state.copyWith(categories: categories, selected: null));
+      getCategoriesUseCase(Cparams('income')).then((value) {
+        value.fold((fail) {
+          emit(state.copyWith(categories: [], selected: null, err: fail.error));
+        }, (data) {
+          emit(state.copyWith(categories: data, selected: null));
+        });
+      });
     } else {
-      categories = expence;
-      emit(state.copyWith(categories: categories, selected: null));
+      getCategoriesUseCase(Cparams('expence')).then((value) {
+        value.fold((fail) {
+          emit(state.copyWith(categories: [], selected: null, err: fail.error));
+        }, (data) {
+          emit(state.copyWith(categories: data, selected: null));
+        });
+      });
     }
   }
 

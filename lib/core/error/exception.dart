@@ -3,3 +3,9 @@ class AuthException implements Exception {
 
   AuthException(this.error);
 }
+
+class DataException implements Exception {
+  final String error;
+
+  DataException(this.error);
+}

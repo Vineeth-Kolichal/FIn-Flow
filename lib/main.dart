@@ -28,7 +28,7 @@ class FinFlowApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => AddTransactionSheetCubit(),
+          create: (context) => getIt<AddTransactionSheetCubit>(),
         ),
         BlocProvider(
           create: (context) => getIt<AuthenticationBloc>(),
