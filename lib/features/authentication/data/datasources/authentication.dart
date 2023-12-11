@@ -55,8 +55,8 @@ class AuthDataSourceImpl implements AuthDataSource {
         }
       });
       return "Success";
-    } catch (e) {
-      throw AuthException(e.toString());
+    } on FirebaseAuthException catch (exception) {
+      throw AuthException(exception.message ?? "Auth failed");
     }
   }
 }
