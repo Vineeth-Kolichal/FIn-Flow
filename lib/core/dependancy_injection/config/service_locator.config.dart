@@ -9,10 +9,10 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:cloud_firestore/cloud_firestore.dart' as _i3;
-import 'package:fin_flow/core/dependancy_injection/modules/firestore_module.dart'
-    as _i10;
 import 'package:fin_flow/core/dependancy_injection/modules/google_sign_in.dart'
     as _i11;
+import 'package:fin_flow/core/dependancy_injection/modules/main_collection_ref_module.dart'
+    as _i10;
 import 'package:fin_flow/features/authentication/data/datasources/authentication.dart'
     as _i5;
 import 'package:fin_flow/features/authentication/data/repositories/auth_repo_impl.dart'
@@ -38,10 +38,10 @@ extension GetItInjectableX on _i1.GetIt {
       environment,
       environmentFilter,
     );
-    final firestoreModule = _$FirestoreModule();
+    final mainCollectionRef = _$MainCollectionRef();
     final googleModule = _$GoogleModule();
     gh.lazySingleton<_i3.CollectionReference<Object?>>(
-        () => firestoreModule.firestore);
+        () => mainCollectionRef.firestore);
     gh.lazySingleton<_i4.GoogleSignIn>(() => googleModule.dioInstance);
     gh.lazySingleton<_i5.AuthDataSource>(() => _i5.AuthDataSourceImpl(
           gh<_i4.GoogleSignIn>(),
@@ -56,6 +56,6 @@ extension GetItInjectableX on _i1.GetIt {
   }
 }
 
-class _$FirestoreModule extends _i10.FirestoreModule {}
+class _$MainCollectionRef extends _i10.MainCollectionRef {}
 
 class _$GoogleModule extends _i11.GoogleModule {}
