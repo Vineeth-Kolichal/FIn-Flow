@@ -21,18 +21,21 @@ mixin _$Failure {
   TResult when<TResult extends Object?>({
     required TResult Function(String error) authError,
     required TResult Function(String error) dataGetFailure,
+    required TResult Function(String error) addDataFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String error)? authError,
     TResult? Function(String error)? dataGetFailure,
+    TResult? Function(String error)? addDataFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String error)? authError,
     TResult Function(String error)? dataGetFailure,
+    TResult Function(String error)? addDataFailure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -40,18 +43,21 @@ mixin _$Failure {
   TResult map<TResult extends Object?>({
     required TResult Function(AuthError value) authError,
     required TResult Function(DataGetFailure value) dataGetFailure,
+    required TResult Function(AddDataFailure value) addDataFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AuthError value)? authError,
     TResult? Function(DataGetFailure value)? dataGetFailure,
+    TResult? Function(AddDataFailure value)? addDataFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AuthError value)? authError,
     TResult Function(DataGetFailure value)? dataGetFailure,
+    TResult Function(AddDataFailure value)? addDataFailure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -160,6 +166,7 @@ class _$AuthErrorImpl implements AuthError {
   TResult when<TResult extends Object?>({
     required TResult Function(String error) authError,
     required TResult Function(String error) dataGetFailure,
+    required TResult Function(String error) addDataFailure,
   }) {
     return authError(error);
   }
@@ -169,6 +176,7 @@ class _$AuthErrorImpl implements AuthError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String error)? authError,
     TResult? Function(String error)? dataGetFailure,
+    TResult? Function(String error)? addDataFailure,
   }) {
     return authError?.call(error);
   }
@@ -178,6 +186,7 @@ class _$AuthErrorImpl implements AuthError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String error)? authError,
     TResult Function(String error)? dataGetFailure,
+    TResult Function(String error)? addDataFailure,
     required TResult orElse(),
   }) {
     if (authError != null) {
@@ -191,6 +200,7 @@ class _$AuthErrorImpl implements AuthError {
   TResult map<TResult extends Object?>({
     required TResult Function(AuthError value) authError,
     required TResult Function(DataGetFailure value) dataGetFailure,
+    required TResult Function(AddDataFailure value) addDataFailure,
   }) {
     return authError(this);
   }
@@ -200,6 +210,7 @@ class _$AuthErrorImpl implements AuthError {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AuthError value)? authError,
     TResult? Function(DataGetFailure value)? dataGetFailure,
+    TResult? Function(AddDataFailure value)? addDataFailure,
   }) {
     return authError?.call(this);
   }
@@ -209,6 +220,7 @@ class _$AuthErrorImpl implements AuthError {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AuthError value)? authError,
     TResult Function(DataGetFailure value)? dataGetFailure,
+    TResult Function(AddDataFailure value)? addDataFailure,
     required TResult orElse(),
   }) {
     if (authError != null) {
@@ -298,6 +310,7 @@ class _$DataGetFailureImpl implements DataGetFailure {
   TResult when<TResult extends Object?>({
     required TResult Function(String error) authError,
     required TResult Function(String error) dataGetFailure,
+    required TResult Function(String error) addDataFailure,
   }) {
     return dataGetFailure(error);
   }
@@ -307,6 +320,7 @@ class _$DataGetFailureImpl implements DataGetFailure {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String error)? authError,
     TResult? Function(String error)? dataGetFailure,
+    TResult? Function(String error)? addDataFailure,
   }) {
     return dataGetFailure?.call(error);
   }
@@ -316,6 +330,7 @@ class _$DataGetFailureImpl implements DataGetFailure {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String error)? authError,
     TResult Function(String error)? dataGetFailure,
+    TResult Function(String error)? addDataFailure,
     required TResult orElse(),
   }) {
     if (dataGetFailure != null) {
@@ -329,6 +344,7 @@ class _$DataGetFailureImpl implements DataGetFailure {
   TResult map<TResult extends Object?>({
     required TResult Function(AuthError value) authError,
     required TResult Function(DataGetFailure value) dataGetFailure,
+    required TResult Function(AddDataFailure value) addDataFailure,
   }) {
     return dataGetFailure(this);
   }
@@ -338,6 +354,7 @@ class _$DataGetFailureImpl implements DataGetFailure {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AuthError value)? authError,
     TResult? Function(DataGetFailure value)? dataGetFailure,
+    TResult? Function(AddDataFailure value)? addDataFailure,
   }) {
     return dataGetFailure?.call(this);
   }
@@ -347,6 +364,7 @@ class _$DataGetFailureImpl implements DataGetFailure {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AuthError value)? authError,
     TResult Function(DataGetFailure value)? dataGetFailure,
+    TResult Function(AddDataFailure value)? addDataFailure,
     required TResult orElse(),
   }) {
     if (dataGetFailure != null) {
@@ -364,5 +382,149 @@ abstract class DataGetFailure implements Failure {
   @override
   @JsonKey(ignore: true)
   _$$DataGetFailureImplCopyWith<_$DataGetFailureImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$AddDataFailureImplCopyWith<$Res>
+    implements $FailureCopyWith<$Res> {
+  factory _$$AddDataFailureImplCopyWith(_$AddDataFailureImpl value,
+          $Res Function(_$AddDataFailureImpl) then) =
+      __$$AddDataFailureImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String error});
+}
+
+/// @nodoc
+class __$$AddDataFailureImplCopyWithImpl<$Res>
+    extends _$FailureCopyWithImpl<$Res, _$AddDataFailureImpl>
+    implements _$$AddDataFailureImplCopyWith<$Res> {
+  __$$AddDataFailureImplCopyWithImpl(
+      _$AddDataFailureImpl _value, $Res Function(_$AddDataFailureImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? error = null,
+  }) {
+    return _then(_$AddDataFailureImpl(
+      null == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$AddDataFailureImpl implements AddDataFailure {
+  _$AddDataFailureImpl(this.error);
+
+  @override
+  final String error;
+
+  @override
+  String toString() {
+    return 'Failure.addDataFailure(error: $error)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$AddDataFailureImpl &&
+            (identical(other.error, error) || other.error == error));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, error);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$AddDataFailureImplCopyWith<_$AddDataFailureImpl> get copyWith =>
+      __$$AddDataFailureImplCopyWithImpl<_$AddDataFailureImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String error) authError,
+    required TResult Function(String error) dataGetFailure,
+    required TResult Function(String error) addDataFailure,
+  }) {
+    return addDataFailure(error);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String error)? authError,
+    TResult? Function(String error)? dataGetFailure,
+    TResult? Function(String error)? addDataFailure,
+  }) {
+    return addDataFailure?.call(error);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String error)? authError,
+    TResult Function(String error)? dataGetFailure,
+    TResult Function(String error)? addDataFailure,
+    required TResult orElse(),
+  }) {
+    if (addDataFailure != null) {
+      return addDataFailure(error);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(AuthError value) authError,
+    required TResult Function(DataGetFailure value) dataGetFailure,
+    required TResult Function(AddDataFailure value) addDataFailure,
+  }) {
+    return addDataFailure(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(AuthError value)? authError,
+    TResult? Function(DataGetFailure value)? dataGetFailure,
+    TResult? Function(AddDataFailure value)? addDataFailure,
+  }) {
+    return addDataFailure?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(AuthError value)? authError,
+    TResult Function(DataGetFailure value)? dataGetFailure,
+    TResult Function(AddDataFailure value)? addDataFailure,
+    required TResult orElse(),
+  }) {
+    if (addDataFailure != null) {
+      return addDataFailure(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class AddDataFailure implements Failure {
+  factory AddDataFailure(final String error) = _$AddDataFailureImpl;
+
+  @override
+  String get error;
+  @override
+  @JsonKey(ignore: true)
+  _$$AddDataFailureImplCopyWith<_$AddDataFailureImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

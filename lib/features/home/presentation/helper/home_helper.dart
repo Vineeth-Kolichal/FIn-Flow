@@ -1,18 +1,21 @@
 import 'package:fin_flow/common/widgets/space.dart';
 import 'package:fin_flow/core/theme/app_theme.dart';
 import 'package:fin_flow/core/theme/text_styles.dart';
+import 'package:fin_flow/features/home/domain/entities/transaction_entity.dart';
 import 'package:fin_flow/features/home/presentation/pages/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import '../bloc_and_cubits/add_transaction_sheet_cubit/add_transaction_sheet_cubit.dart';
 
-mixin HomeHelper{
-
+final formKey = GlobalKey<FormState>();
+mixin HomeHelper {
   Future<dynamic> addTransactionSheet(BuildContext context) {
     ValueNotifier<TransactionType?> typeNotifier = ValueNotifier(null);
     TextEditingController amountController = TextEditingController();
     TextEditingController descriptionController = TextEditingController();
+    String? category;
     return showModalBottomSheet(
       showDragHandle: true,
       isScrollControlled: true,
@@ -23,136 +26,190 @@ mixin HomeHelper{
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(10.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Text(
-                  'Add Transaction',
-                  style: txt16BlackB,
-                ),
-                Space.y(10),
-                TextFormField(
-                  controller: amountController,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                      hintText: "Amount",
-                      contentPadding:
-                          const EdgeInsets.symmetric(horizontal: 10),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10))),
-                ),
-                ValueListenableBuilder(
-                  valueListenable: typeNotifier,
-                  builder: (context, type, _) {
-                    return Row(
-                      children: [
-                        Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Radio(
-                              value: TransactionType.income,
-                              groupValue: type,
-                              onChanged: (value) {
-                                typeNotifier.value = value;
-                                context
-                                    .read<AddTransactionSheetCubit>()
-                                    .getCategories(value!);
-                              },
-                            ),
-                            const Text('Income')
-                          ],
-                        ),
-                        Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Radio(
-                              value: TransactionType.expence,
-                              groupValue: type,
-                              onChanged: (value) {
-                                typeNotifier.value = value;
-                                context
-                                    .read<AddTransactionSheetCubit>()
-                                    .getCategories(value!);
-                              },
-                            ),
-                            const Text('Expence')
-                          ],
-                        ),
-                      ],
-                    );
-                  },
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    BlocBuilder<AddTransactionSheetCubit,
-                        AddTransactionSheetState>(
-                      builder: (context, state) {
-                        return DropdownButton(
-                          hint: const Text("Select category"),
-                          value: state.selected,
-                          items: List.generate(
-                            state.categories.length,
-                            (index) => DropdownMenuItem(
-                              value: state.categories[index],
-                              child: Text(
-                                state.categories[index],
+            child: Form(
+              key: formKey,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Text(
+                    'Add Transaction',
+                    style: txt16BlackB,
+                  ),
+                  Space.y(10),
+                  TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Amount is required";
+                      } else {
+                        return null;
+                      }
+                    },
+                    controller: amountController,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                        hintText: "Amount",
+                        contentPadding:
+                            const EdgeInsets.symmetric(horizontal: 10),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10))),
+                  ),
+                  ValueListenableBuilder(
+                    valueListenable: typeNotifier,
+                    builder: (context, type, _) {
+                      return Row(
+                        children: [
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Radio(
+                                value: TransactionType.income,
+                                groupValue: type,
+                                onChanged: (value) {
+                                  typeNotifier.value = value;
+                                  context
+                                      .read<AddTransactionSheetCubit>()
+                                      .getCategories(value!);
+                                },
+                              ),
+                              const Text('Income')
+                            ],
+                          ),
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Radio(
+                                value: TransactionType.expence,
+                                groupValue: type,
+                                onChanged: (value) {
+                                  typeNotifier.value = value;
+                                  context
+                                      .read<AddTransactionSheetCubit>()
+                                      .getCategories(value!);
+                                },
+                              ),
+                              const Text('Expence')
+                            ],
+                          ),
+                        ],
+                      );
+                    },
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      BlocConsumer<AddTransactionSheetCubit,
+                          AddTransactionSheetState>(
+                        listener: (context, state) {
+                          if (state.successMsg != null) {
+                            Fluttertoast.showToast(
+                              msg: "${state.successMsg}",
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.CENTER,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor: AppTheme.blackColor,
+                              textColor: AppTheme.whiteColor,
+                              fontSize: 12.0,
+                            );
+                          }
+                        },
+                        builder: (context, state) {
+                          return DropdownButton(
+                            hint: const Text("Select category"),
+                            value: state.selected,
+                            items: List.generate(
+                              state.categories.length,
+                              (index) => DropdownMenuItem(
+                                value: state.categories[index],
+                                child: Text(
+                                  state.categories[index],
+                                ),
                               ),
                             ),
-                          ),
-                          onChanged: (selected) {
-                            context
-                                .read<AddTransactionSheetCubit>()
-                                .selectCategories(selected!);
-                          },
-                        );
-                      },
-                    ),
-                    TextButton.icon(
-                      onPressed: () {
-                        addCategoryDialoge(context);
-                      },
-                      icon: const Icon(
-                        Icons.add,
-                        size: 12,
-                        color: AppTheme.blueColor,
+                            onChanged: (selected) {
+                              category = selected;
+                              context
+                                  .read<AddTransactionSheetCubit>()
+                                  .selectCategories(selected!);
+                            },
+                          );
+                        },
                       ),
-                      label: const Text(
-                        'Add category',
-                        style: txt12Blue,
-                      ),
-                    )
-                  ],
-                ),
-                Space.y(10),
-                TextFormField(
-                  controller: descriptionController,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                      hintText: "Short description",
-                      contentPadding:
-                          const EdgeInsets.symmetric(horizontal: 10),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10))),
-                ),
-                Space.y(10),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppTheme.blackColor,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    onPressed: () {},
-                    child: const Text(
-                      "Add Transaction",
-                      style: txt14WhiteB,
-                    ),
+                      TextButton.icon(
+                        onPressed: () {
+                          addCategoryDialoge(context);
+                        },
+                        icon: const Icon(
+                          Icons.add,
+                          size: 12,
+                          color: AppTheme.blueColor,
+                        ),
+                        label: const Text(
+                          'Add category',
+                          style: txt12Blue,
+                        ),
+                      )
+                    ],
                   ),
-                )
-              ],
+                  Space.y(10),
+                  TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Short description is required";
+                      } else {
+                        return null;
+                      }
+                    },
+                    controller: descriptionController,
+                    keyboardType: TextInputType.text,
+                    decoration: InputDecoration(
+                        hintText: "Short description",
+                        contentPadding:
+                            const EdgeInsets.symmetric(horizontal: 10),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10))),
+                  ),
+                  Space.y(10),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppTheme.blackColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      onPressed: () {
+                        if (formKey.currentState!.validate()) {
+                          double amount =
+                              double.parse(amountController.text.trim());
+                          bool isIncome =
+                              typeNotifier.value == TransactionType.income;
+
+                          print(
+                              '$amount, $isIncome, ${descriptionController.text},$category');
+
+                          context
+                              .read<AddTransactionSheetCubit>()
+                              .addTransaction(
+                                AddTransactionEntity(
+                                  amount: amount,
+                                  isIncome: isIncome,
+                                  category: category!,
+                                  description:
+                                      descriptionController.text.trim(),
+                                ),
+                              );
+                          Navigator.of(context).pop();
+                        }
+                      },
+                      child: const Text(
+                        "Add Transaction",
+                        style: txt14WhiteB,
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ),
@@ -242,5 +299,4 @@ mixin HomeHelper{
       },
     );
   }
-
 }

@@ -19,6 +19,7 @@ mixin _$AddTransactionSheetState {
   List<String> get categories => throw _privateConstructorUsedError;
   String? get selected => throw _privateConstructorUsedError;
   String? get err => throw _privateConstructorUsedError;
+  String? get successMsg => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AddTransactionSheetStateCopyWith<AddTransactionSheetState> get copyWith =>
@@ -31,7 +32,11 @@ abstract class $AddTransactionSheetStateCopyWith<$Res> {
           $Res Function(AddTransactionSheetState) then) =
       _$AddTransactionSheetStateCopyWithImpl<$Res, AddTransactionSheetState>;
   @useResult
-  $Res call({List<String> categories, String? selected, String? err});
+  $Res call(
+      {List<String> categories,
+      String? selected,
+      String? err,
+      String? successMsg});
 }
 
 /// @nodoc
@@ -51,6 +56,7 @@ class _$AddTransactionSheetStateCopyWithImpl<$Res,
     Object? categories = null,
     Object? selected = freezed,
     Object? err = freezed,
+    Object? successMsg = freezed,
   }) {
     return _then(_value.copyWith(
       categories: null == categories
@@ -65,6 +71,10 @@ class _$AddTransactionSheetStateCopyWithImpl<$Res,
           ? _value.err
           : err // ignore: cast_nullable_to_non_nullable
               as String?,
+      successMsg: freezed == successMsg
+          ? _value.successMsg
+          : successMsg // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -77,7 +87,11 @@ abstract class _$$InitialImplCopyWith<$Res>
       __$$InitialImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<String> categories, String? selected, String? err});
+  $Res call(
+      {List<String> categories,
+      String? selected,
+      String? err,
+      String? successMsg});
 }
 
 /// @nodoc
@@ -94,6 +108,7 @@ class __$$InitialImplCopyWithImpl<$Res>
     Object? categories = null,
     Object? selected = freezed,
     Object? err = freezed,
+    Object? successMsg = freezed,
   }) {
     return _then(_$InitialImpl(
       categories: null == categories
@@ -108,6 +123,10 @@ class __$$InitialImplCopyWithImpl<$Res>
           ? _value.err
           : err // ignore: cast_nullable_to_non_nullable
               as String?,
+      successMsg: freezed == successMsg
+          ? _value.successMsg
+          : successMsg // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -118,7 +137,8 @@ class _$InitialImpl implements _Initial {
   const _$InitialImpl(
       {required final List<String> categories,
       required this.selected,
-      required this.err})
+      required this.err,
+      required this.successMsg})
       : _categories = categories;
 
   final List<String> _categories;
@@ -133,10 +153,12 @@ class _$InitialImpl implements _Initial {
   final String? selected;
   @override
   final String? err;
+  @override
+  final String? successMsg;
 
   @override
   String toString() {
-    return 'AddTransactionSheetState(categories: $categories, selected: $selected, err: $err)';
+    return 'AddTransactionSheetState(categories: $categories, selected: $selected, err: $err, successMsg: $successMsg)';
   }
 
   @override
@@ -148,12 +170,18 @@ class _$InitialImpl implements _Initial {
                 .equals(other._categories, _categories) &&
             (identical(other.selected, selected) ||
                 other.selected == selected) &&
-            (identical(other.err, err) || other.err == err));
+            (identical(other.err, err) || other.err == err) &&
+            (identical(other.successMsg, successMsg) ||
+                other.successMsg == successMsg));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(_categories), selected, err);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_categories),
+      selected,
+      err,
+      successMsg);
 
   @JsonKey(ignore: true)
   @override
@@ -166,7 +194,8 @@ abstract class _Initial implements AddTransactionSheetState {
   const factory _Initial(
       {required final List<String> categories,
       required final String? selected,
-      required final String? err}) = _$InitialImpl;
+      required final String? err,
+      required final String? successMsg}) = _$InitialImpl;
 
   @override
   List<String> get categories;
@@ -174,6 +203,8 @@ abstract class _Initial implements AddTransactionSheetState {
   String? get selected;
   @override
   String? get err;
+  @override
+  String? get successMsg;
   @override
   @JsonKey(ignore: true)
   _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>

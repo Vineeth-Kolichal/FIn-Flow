@@ -46,3 +46,7 @@ const txt14WhiteB = TextStyle(
   fontSize: 14,
   fontWeight: FontWeight.bold,
 );
+const txt12White = TextStyle(
+  color: AppTheme.whiteColor,
+  fontSize: 12,
+);

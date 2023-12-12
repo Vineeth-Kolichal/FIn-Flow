@@ -5,4 +5,5 @@ part 'failure.freezed.dart';
 class Failure with _$Failure {
   factory Failure.authError(String error) = AuthError;
   factory Failure.dataGetFailure(String error) = DataGetFailure;
+  factory Failure.addDataFailure(String error) = AddDataFailure;
 }

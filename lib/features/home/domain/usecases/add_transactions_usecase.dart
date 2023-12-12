@@ -1,3 +1,23 @@
-// import 'package:fin_flow/core/usecases/usecases.dart';
+import 'package:dartz/dartz.dart';
+import 'package:fin_flow/core/error/failure.dart';
+import 'package:fin_flow/core/usecases/usecases.dart';
+import 'package:fin_flow/features/home/domain/entities/transaction_entity.dart';
+import 'package:fin_flow/features/home/domain/repositories/add_transactions_repo.dart';
+import 'package:injectable/injectable.dart';
 
-// class AddTransactions implements UseCase<
+@lazySingleton
+@injectable
+class AddTransactionsUseCase implements UseCase<String, AddParam> {
+  AddTransactionsRepositories addTransactionsRepositories;
+  AddTransactionsUseCase(this.addTransactionsRepositories);
+
+  @override
+  Future<Either<Failure, String>> call(AddParam params) async {
+    return await addTransactionsRepositories.addTransaction(params);
+  }
+}
+
+class AddParam {
+  AddTransactionEntity transaction;
+  AddParam(this.transaction);
+}
