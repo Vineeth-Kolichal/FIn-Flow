@@ -5,6 +5,7 @@ import 'package:fin_flow/features/home/presentation/bloc_and_cubits/home_screen_
 import 'package:fin_flow/features/home/presentation/helper/home_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../common/widgets/export_common_widgets.dart';
 
@@ -66,6 +67,11 @@ class TopSection extends StatelessWidget with HomeHelper {
                     ),
                   ),
                 )),
+                Space.y(10),
+                Visibility(
+                  visible: value == 2,
+                  child: const CustomDateRow(),
+                ),
                 Space.y(10),
                 Container(
                   padding: const EdgeInsets.all(
@@ -150,6 +156,106 @@ class TopSection extends StatelessWidget with HomeHelper {
               ],
             );
           }),
+    );
+  }
+}
+
+class CustomDateRow extends StatelessWidget {
+  const CustomDateRow({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    DateTime? fromDate;
+    DateTime? toDate;
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        DateSelectionButton(
+            onPressed: (from) {
+              fromDate = from;
+            },
+            title: "From date :"),
+        Space.x(20),
+        DateSelectionButton(
+            onPressed: (to) {
+              toDate = to;
+            },
+            title: "To date :"),
+        Space.x(20),
+        ElevatedButton(
+            onPressed: () {
+              print("${fromDate.toString()}, ${toDate.toString()}");
+            },
+            child: Text("Go"))
+      ],
+    );
+  }
+}
+
+class DateSelectionButton extends StatelessWidget {
+  final String title;
+  final Function(DateTime selectedDate) onPressed;
+
+  const DateSelectionButton({
+    required this.onPressed,
+    required this.title,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    ValueNotifier<DateTime?> dateNotifier = ValueNotifier(null);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: txt12Grey,
+        ),
+        InkWell(
+          borderRadius: BorderRadius.circular(10),
+          onTap: () async {
+            DateTime? pickedDate = await showDatePicker(
+              context: context,
+              initialDate: DateTime.now(),
+              firstDate: DateTime(1950),
+              lastDate: DateTime(2100),
+            );
+            if (pickedDate != null) {
+              dateNotifier.value = pickedDate;
+              onPressed(pickedDate);
+            }
+          },
+          child: Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              border: Border.all(color: AppTheme.greyColor),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Icon(
+                  Icons.calendar_month,
+                  size: 17,
+                ),
+                Space.x(5),
+                ValueListenableBuilder(
+                    valueListenable: dateNotifier,
+                    builder: (context, date, _) {
+                      String label = "Select Date";
+                      if (date != null) {
+                        label = DateFormat('dd-MM-yyyy').format(date);
+                      }
+                      return Text(label);
+                    })
+              ],
+            ),
+          ),
+        )
+      ],
     );
   }
 }

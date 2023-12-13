@@ -18,10 +18,12 @@ class HomeScreen extends StatelessWidget with HomeHelper {
       filter(
           currrentIndex: 0,
           filteredDate: (fromDate, toDate) {
-            context.read<HomeScreenBloc>().add(GetTransactions(
-                  fromDate: fromDate,
-                  toDate: toDate,
-                ));
+            context.read<HomeScreenBloc>().add(
+                  GetTransactions(
+                    fromDate: fromDate,
+                    toDate: toDate,
+                  ),
+                );
           });
       // context.read<HomeScreenBloc>().add(GetTransactions(
       //     fromDate: DateTime(2023, DateTime.now().month, DateTime.now().day),
