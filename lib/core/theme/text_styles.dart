@@ -31,14 +31,14 @@ const txt35RedB = TextStyle(
   fontSize: 35,
   fontWeight: FontWeight.bold,
 );
-const txt18GreenB = TextStyle(
+const txt16GreenB = TextStyle(
   color: AppTheme.greenColor,
-  fontSize: 18,
+  fontSize: 16,
   fontWeight: FontWeight.bold,
 );
-const txt18RedB = TextStyle(
+const txt16RedB = TextStyle(
   color: AppTheme.redColor,
-  fontSize: 18,
+  fontSize: 16,
   fontWeight: FontWeight.bold,
 );
 const txt14WhiteB = TextStyle(

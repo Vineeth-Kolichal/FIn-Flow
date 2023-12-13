@@ -335,4 +335,38 @@ mixin HomeHelper {
       filteredDate(thisMonthStart, now);
     }
   }
+
+  double total(List<TransactionEntity> list) {
+    double sum = 0.0;
+    for (var t in list) {
+      if (t.isIncome) {
+        sum = sum + t.amount;
+      } else {
+        sum = sum - t.amount;
+      }
+    }
+
+    return sum;
+  }
+
+  double totlaIncome(List<TransactionEntity> list) {
+    double sum = 0.0;
+    for (var t in list) {
+      if (t.isIncome) {
+        sum = sum + t.amount;
+      }
+    }
+    return sum;
+  }
+
+  double totalExpence(List<TransactionEntity> list) {
+    double sum = 0.0;
+    for (var t in list) {
+      if (!(t.isIncome)) {
+        sum = sum + t.amount;
+      }
+    }
+
+    return sum;
+  }
 }

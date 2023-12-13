@@ -1,3 +1,4 @@
+import 'package:fin_flow/common/widgets/space.dart';
 import 'package:fin_flow/core/theme/app_theme.dart';
 import 'package:fin_flow/core/theme/fin_flow_icons_icons.dart';
 import 'package:fin_flow/core/theme/text_styles.dart';
@@ -6,6 +7,7 @@ import 'package:fin_flow/features/home/presentation/bloc_and_cubits/home_screen_
 import 'package:fin_flow/features/home/presentation/helper/home_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 import '../widgets/top_section.dart';
 
@@ -56,11 +58,32 @@ class HomeScreen extends StatelessWidget with HomeHelper {
             );
           }
           //  else if (state.error != null) {
-
           //   return Center(
-          //     child: Text(
-          //       "${state.error}",
-          //       textAlign: TextAlign.center,
+          //     child: Container(
+          //       decoration: BoxDecoration(
+          //           borderRadius: BorderRadius.circular(20),
+          //           color: AppTheme.whiteColor),
+          //       width: size.width * 0.8,
+          //       height: size.width * 0.5,
+          //       child: Center(
+          //         child: Column(
+          //           children: [
+          //             Image.asset(
+          //               'assets/images/error.png',
+          //               height: 70,
+          //             ),
+          //             const Text(
+          //               'Error',
+          //               style: txt18RedB,
+          //             ),
+          //             Space.y(5),
+          //             Text(
+          //               "${state.error}",
+          //               textAlign: TextAlign.center,
+          //             ),
+          //           ],
+          //         ),
+          //       ),
           //     ),
           //   );
           // }
@@ -69,7 +92,7 @@ class HomeScreen extends StatelessWidget with HomeHelper {
 
             return CustomScrollView(slivers: [
               SliverToBoxAdapter(
-                child: TopSection(),
+                child: TopSection(transactionList: state.transactionList),
               ),
               (dataList.isEmpty)
                   ? SliverToBoxAdapter(
@@ -120,27 +143,49 @@ class TransactionListTile extends StatelessWidget with HomeHelper {
       padding: const EdgeInsets.symmetric(
         vertical: 5,
       ),
-      child: Container(
-        color: AppTheme.whiteColor,
-        child: ListTile(
-          leading: data.isIncome
-              ? const Icon(
-                  FinFlowIcons.arrow_circle_up,
-                  color: AppTheme.greenColor,
-                )
-              : const Icon(
-                  FinFlowIcons.arrow_circle_down,
-                  color: AppTheme.redColor,
-                ),
-          title: Text('₹${data.amount}'),
-          subtitle: RichText(
-              text: TextSpan(
-                  style: txt12Blue,
-                  text: "${data.category} :",
-                  children: [
-                TextSpan(text: data.description, style: txt12Grey)
-              ])),
-          trailing: Text(convertDate(data.date!)),
+      child: Slidable(
+        key: const ValueKey(0),
+        startActionPane: ActionPane(
+          motion: const ScrollMotion(),
+          children: [
+            SlidableAction(
+              onPressed: (_) {},
+              backgroundColor: AppTheme.whiteColor,
+              foregroundColor: AppTheme.greyColor,
+              icon: Icons.delete,
+              label: 'Delete',
+            ),
+            SlidableAction(
+              onPressed: (_) {},
+              backgroundColor: AppTheme.whiteColor,
+              foregroundColor: AppTheme.greyColor,
+              icon: Icons.edit,
+              label: 'Edit',
+            ),
+          ],
+        ),
+        child: Container(
+          color: AppTheme.whiteColor,
+          child: ListTile(
+            leading: data.isIncome
+                ? const Icon(
+                    FinFlowIcons.arrow_circle_up,
+                    color: AppTheme.greenColor,
+                  )
+                : const Icon(
+                    FinFlowIcons.arrow_circle_down,
+                    color: AppTheme.redColor,
+                  ),
+            title: Text('₹${data.amount}'),
+            subtitle: RichText(
+                text: TextSpan(
+                    style: txt12Blue,
+                    text: "${data.category} :",
+                    children: [
+                  TextSpan(text: data.description, style: txt12Grey)
+                ])),
+            trailing: Text(convertDate(data.date!)),
+          ),
         ),
       ),
     );

@@ -1,6 +1,7 @@
 import 'package:fin_flow/core/theme/app_theme.dart';
 import 'package:fin_flow/core/theme/fin_flow_icons_icons.dart';
 import 'package:fin_flow/core/theme/text_styles.dart';
+import 'package:fin_flow/features/home/domain/entities/transaction_entity.dart';
 import 'package:fin_flow/features/home/presentation/bloc_and_cubits/home_screen_bloc/home_screen_bloc.dart';
 import 'package:fin_flow/features/home/presentation/helper/home_helper.dart';
 import 'package:flutter/material.dart';
@@ -12,13 +13,14 @@ import '../../../../common/widgets/export_common_widgets.dart';
 ValueNotifier<int> timeFrameSelected = ValueNotifier(0);
 
 class TopSection extends StatelessWidget with HomeHelper {
+  final List<TransactionEntity> transactionList;
   const TopSection({
+    required this.transactionList,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    print('rebuild');
     Size size = MediaQuery.of(context).size;
     List<String> selectionTitle = ["Today", "This month", "Custom"];
     return Padding(
@@ -73,89 +75,120 @@ class TopSection extends StatelessWidget with HomeHelper {
                   child: const CustomDateRow(),
                 ),
                 Space.y(10),
-                Container(
-                  padding: const EdgeInsets.all(
-                    15,
-                  ),
-
-                  width: size.width,
-                  // height: 200,
-                  decoration: BoxDecoration(
-                    image: const DecorationImage(
-                        image: AssetImage(
-                          'assets/images/chart.png',
-                        ),
-                        opacity: 0.1,
-                        fit: BoxFit.cover),
-                    color: AppTheme.whiteColor,
-                    borderRadius: BorderRadius.circular(
-                      20,
-                    ),
-                  ),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Today',
-                            style: txt16BlackB,
-                          ),
-                          InkWell(
-                              onTap: () {},
-                              child: Icon(
-                                FinFlowIcons.file_pdf,
-                                size: 17,
-                                color: AppTheme.redColor,
-                              ))
-                        ],
-                      ),
-                      Divider(),
-                      SizedBox(
-                        height: 70,
-                        child: Center(
-                          child: Text(
-                            '₹0.0',
-                            style: txt35GreenB,
-                          ),
-                        ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.arrow_circle_up,
-                            color: AppTheme.greenColor,
-                          ),
-                          Text(
-                            '₹0.0',
-                            style: txt18GreenB,
-                          ),
-                          SizedBox(
-                            width: 15,
-                            height: 20,
-                            child: Center(
-                              child: VerticalDivider(),
-                            ),
-                          ),
-                          Icon(
-                            Icons.arrow_circle_down,
-                            color: AppTheme.redColor,
-                          ),
-                          Text(
-                            '₹0.0',
-                            style: txt18RedB,
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
+                SummeryContainer(transactions: transactionList),
                 Space.y(10),
                 Text('Transactions')
               ],
             );
           }),
+    );
+  }
+}
+
+class SummeryContainer extends StatelessWidget with HomeHelper {
+  const SummeryContainer({
+    required this.transactions,
+    super.key,
+  });
+
+  final List<TransactionEntity> transactions;
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    double totolValue = total(transactions);
+    return Container(
+      padding: const EdgeInsets.all(
+        15,
+      ),
+
+      width: size.width,
+      // height: 200,
+      decoration: BoxDecoration(
+        image: const DecorationImage(
+            image: AssetImage(
+              'assets/images/chart.png',
+            ),
+            opacity: 0.1,
+            fit: BoxFit.cover),
+        color: AppTheme.whiteColor,
+        borderRadius: BorderRadius.circular(
+          20,
+        ),
+      ),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              ValueListenableBuilder(
+                  valueListenable: timeFrameSelected,
+                  builder: (context, selected, _) {
+                    String title = "Today";
+                    if (selected == 0) {
+                      title = "Today";
+                    } else if (selected == 1) {
+                      title = "This month";
+                    } else {
+                      title = "Custom search";
+                    }
+                    return Text(
+                      title,
+                      style: txt16BlackB,
+                    );
+                  }),
+              InkWell(
+                  onTap: () {},
+                  child: const Icon(
+                    FinFlowIcons.file_pdf,
+                    size: 17,
+                    color: AppTheme.redColor,
+                  ))
+            ],
+          ),
+          const Divider(),
+          SizedBox(
+            height: 70,
+            child: Center(
+              child: Text(
+                (totolValue > 0) ? '₹$totolValue' : '₹${totolValue * -1}',
+                style: (totolValue > 0) ? txt35GreenB : txt35RedB,
+              ),
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(
+                size: 17,
+                FinFlowIcons.arrow_circle_up,
+                color: AppTheme.greenColor,
+              ),
+              Space.x(5),
+              Text(
+                '₹${totlaIncome(transactions)}',
+                style: txt16GreenB,
+              ),
+              const SizedBox(
+                width: 15,
+                height: 20,
+                child: Center(
+                  child: VerticalDivider(),
+                ),
+              ),
+              const Icon(
+                size: 17,
+                FinFlowIcons.arrow_circle_down,
+                color: AppTheme.redColor,
+              ),
+              Space.x(5),
+              Text(
+                '₹${totalExpence(transactions)}',
+                style: txt16RedB,
+              ),
+            ],
+          )
+        ],
+      ),
     );
   }
 }
@@ -184,11 +217,26 @@ class CustomDateRow extends StatelessWidget {
             },
             title: "To date :"),
         Space.x(20),
-        ElevatedButton(
-            onPressed: () {
-              print("${fromDate.toString()}, ${toDate.toString()}");
+        InkWell(
+            borderRadius: BorderRadius.circular(10),
+            onTap: () {
+              if (fromDate != null && toDate != null) {
+                context.read<HomeScreenBloc>().add(GetTransactions(
+                      fromDate: fromDate!,
+                      toDate: toDate!,
+                    ));
+              }
             },
-            child: Text("Go"))
+            child: Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                  color: AppTheme.blackColor,
+                  borderRadius: BorderRadius.circular(10)),
+              child: const Text(
+                "Go",
+                style: txt14WhiteB,
+              ),
+            ))
       ],
     );
   }
