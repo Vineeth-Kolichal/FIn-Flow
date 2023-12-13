@@ -15,9 +15,17 @@ class HomeScreen extends StatelessWidget with HomeHelper {
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      context.read<HomeScreenBloc>().add(GetTransactions(
-          fromDate: DateTime(2023, DateTime.now().month, DateTime.now().day),
-          toDate: DateTime.now()));
+      filter(
+          currrentIndex: 0,
+          filteredDate: (fromDate, toDate) {
+            context.read<HomeScreenBloc>().add(GetTransactions(
+                  fromDate: fromDate,
+                  toDate: toDate,
+                ));
+          });
+      // context.read<HomeScreenBloc>().add(GetTransactions(
+      //     fromDate: DateTime(2023, DateTime.now().month, DateTime.now().day),
+      //     toDate: DateTime.now()));
     });
     Size size = MediaQuery.of(context).size;
     return Scaffold(
@@ -37,20 +45,24 @@ class HomeScreen extends StatelessWidget with HomeHelper {
       ),
       body: BlocBuilder<HomeScreenBloc, HomeScreenState>(
         builder: (context, state) {
+          print("${state.error}");
           if (state.isLoading) {
             return const Center(
               child: CircularProgressIndicator(
                 strokeWidth: 2,
               ),
             );
-          } else if (state.error != null) {
-            return Center(
-              child: Text(
-                "${state.error}",
-                textAlign: TextAlign.center,
-              ),
-            );
-          } else {
+          }
+          //  else if (state.error != null) {
+
+          //   return Center(
+          //     child: Text(
+          //       "${state.error}",
+          //       textAlign: TextAlign.center,
+          //     ),
+          //   );
+          // }
+          else {
             final dataList = state.transactionList;
 
             return CustomScrollView(slivers: [

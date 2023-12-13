@@ -17,6 +17,7 @@ class TopSection extends StatelessWidget with HomeHelper {
 
   @override
   Widget build(BuildContext context) {
+    print('rebuild');
     Size size = MediaQuery.of(context).size;
     List<String> selectionTitle = ["Today", "This month", "Custom"];
     return Padding(
@@ -24,15 +25,6 @@ class TopSection extends StatelessWidget with HomeHelper {
       child: ValueListenableBuilder(
           valueListenable: timeFrameSelected,
           builder: (context, value, _) {
-            if (value == 0 || value == 1) {
-              filter(
-                  currrentIndex: value,
-                  filteredDate: (fromDate, toDate) {
-                    context.read<HomeScreenBloc>().add(
-                        GetTransactions(fromDate: fromDate, toDate: toDate));
-                  });
-            }
-
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -43,6 +35,15 @@ class TopSection extends StatelessWidget with HomeHelper {
                     borderRadius: BorderRadius.circular(90),
                     onTap: () {
                       timeFrameSelected.value = index;
+                      if (value == 0 || value == 1) {
+                        filter(
+                            currrentIndex: value,
+                            filteredDate: (fromDate, toDate) {
+                              context.read<HomeScreenBloc>().add(
+                                  GetTransactions(
+                                      fromDate: fromDate, toDate: toDate));
+                            });
+                      }
                     },
                     child: Container(
                       margin: const EdgeInsets.all(7),
