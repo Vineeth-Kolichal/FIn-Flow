@@ -1,21 +1,23 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fin_flow/features/home/data/models/transaction_model.dart';
 import 'package:fin_flow/features/home/domain/usecases/get_categories_usecase.dart';
+import 'package:fin_flow/features/home/domain/usecases/get_transactions_usecase.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../core/error/exception.dart';
 
-abstract class AddTransactionDataSource {
+abstract class TransactionDataSource {
   Future<List<String>> getCategories(Cparams param);
   Future<String> addTransaction(TransactionModel transactionModel);
+  Future<List<TransactionModel>> getTransactions(DateParams params);
 }
 
-@LazySingleton(as: AddTransactionDataSource)
+@LazySingleton(as: TransactionDataSource)
 @injectable
-class AddTransactionsDataSourceImpl implements AddTransactionDataSource {
+class TransactionsDataSourceImpl implements TransactionDataSource {
   final CollectionReference mainCollectionRef;
-  AddTransactionsDataSourceImpl(this.mainCollectionRef);
+  TransactionsDataSourceImpl(this.mainCollectionRef);
   static final uid = FirebaseAuth.instance.currentUser!.uid;
   @override
   Future<List<String>> getCategories(Cparams param) async {
@@ -43,6 +45,27 @@ class AddTransactionsDataSourceImpl implements AddTransactionDataSource {
           .collection('Transactions')
           .add(transactionModel.toMap());
       return "Added successfully with id : ${docRef.id}";
+    } on FirebaseException catch (e) {
+      throw DataException('${e.message}');
+    }
+  }
+
+  @override
+  Future<List<TransactionModel>> getTransactions(DateParams params) async {
+    try {
+      List<TransactionModel> transactionList = [];
+      final transactionData = await mainCollectionRef
+          .doc(uid)
+          .collection('Transactions')
+          .where('date', isGreaterThanOrEqualTo: params.fromDate)
+          .where('date', isLessThan: params.toDate)
+          .get();
+      for (var dta in transactionData.docs) {
+        Map<String, dynamic> data = dta.data();
+        data['id'] = dta.id;
+        transactionList.add(TransactionModel.fromMap(data));
+      }
+      return transactionList.reversed.toList();
     } on FirebaseException catch (e) {
       throw DataException('${e.message}');
     }

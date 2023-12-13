@@ -3,9 +3,11 @@ import 'package:fin_flow/core/theme/app_theme.dart';
 import 'package:fin_flow/core/theme/text_styles.dart';
 import 'package:fin_flow/features/home/domain/entities/transaction_entity.dart';
 import 'package:fin_flow/features/home/presentation/pages/home_screen.dart';
+import 'package:fin_flow/features/home/presentation/widgets/top_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:intl/intl.dart';
 
 import '../bloc_and_cubits/add_transaction_sheet_cubit/add_transaction_sheet_cubit.dart';
 
@@ -199,6 +201,7 @@ mixin HomeHelper {
                                       descriptionController.text.trim(),
                                 ),
                               );
+                          timeFrameSelected.value = 0;
                           Navigator.of(context).pop();
                         }
                       },
@@ -298,5 +301,38 @@ mixin HomeHelper {
         );
       },
     );
+  }
+
+  String convertDate(DateTime date) {
+    DateTime today = DateTime.now();
+    final yesterday = DateTime.now().subtract(const Duration(days: 1));
+
+    if (today.year == date.year &&
+        today.month == date.month &&
+        today.day == date.day) {
+      return "Today"; // Print 'Today' if the dates are the same
+    }
+    if (date.year == yesterday.year &&
+        date.month == yesterday.month &&
+        date.day == yesterday.day) {
+      return "Yesterday";
+    } else {
+      return DateFormat('dd MMM yyyy').format(date);
+    }
+  }
+
+  void filter(
+      {required int currrentIndex,
+      required void Function(DateTime fromDate, DateTime todate)
+          filteredDate}) {
+    final now = DateTime.now();
+    DateTime todayStart = DateTime(now.year, now.month, now.day);
+    DateTime thisMonthStart = DateTime(now.year, now.month);
+    if (currrentIndex == 0) {
+      filteredDate(todayStart, now);
+    }
+    if (currrentIndex == 1) {
+      filteredDate(thisMonthStart, now);
+    }
   }
 }

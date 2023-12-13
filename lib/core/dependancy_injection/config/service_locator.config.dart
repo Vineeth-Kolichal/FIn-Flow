@@ -10,9 +10,9 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:cloud_firestore/cloud_firestore.dart' as _i3;
 import 'package:fin_flow/core/dependancy_injection/modules/google_sign_in.dart'
-    as _i17;
+    as _i19;
 import 'package:fin_flow/core/dependancy_injection/modules/main_collection_ref_module.dart'
-    as _i16;
+    as _i18;
 import 'package:fin_flow/features/authentication/data/datasources/authentication.dart'
     as _i9;
 import 'package:fin_flow/features/authentication/data/repositories/auth_repo_impl.dart'
@@ -23,18 +23,22 @@ import 'package:fin_flow/features/authentication/domain/usecases/auth_usecase.da
     as _i12;
 import 'package:fin_flow/features/authentication/presentation/authentication_bloc/authentication_bloc.dart'
     as _i13;
-import 'package:fin_flow/features/home/data/datasources/add_transactions_data.dart'
+import 'package:fin_flow/features/home/data/datasources/transactions_data_source.dart'
     as _i5;
-import 'package:fin_flow/features/home/data/repositories/add_transactions_repo_impl.dart'
+import 'package:fin_flow/features/home/data/repositories/transactions_repo_impl.dart'
     as _i7;
-import 'package:fin_flow/features/home/domain/repositories/add_transactions_repo.dart'
+import 'package:fin_flow/features/home/domain/repositories/transactions_repo.dart'
     as _i6;
 import 'package:fin_flow/features/home/domain/usecases/add_transactions_usecase.dart'
     as _i8;
 import 'package:fin_flow/features/home/domain/usecases/get_categories_usecase.dart'
     as _i14;
-import 'package:fin_flow/features/home/presentation/bloc_and_cubits/add_transaction_sheet_cubit/add_transaction_sheet_cubit.dart'
+import 'package:fin_flow/features/home/domain/usecases/get_transactions_usecase.dart'
     as _i15;
+import 'package:fin_flow/features/home/presentation/bloc_and_cubits/add_transaction_sheet_cubit/add_transaction_sheet_cubit.dart'
+    as _i17;
+import 'package:fin_flow/features/home/presentation/bloc_and_cubits/home_screen_bloc/home_screen_bloc.dart'
+    as _i16;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:google_sign_in/google_sign_in.dart' as _i4;
 import 'package:injectable/injectable.dart' as _i2;
@@ -55,13 +59,12 @@ extension GetItInjectableX on _i1.GetIt {
     gh.lazySingleton<_i3.CollectionReference<Object?>>(
         () => mainCollectionRef.firestore);
     gh.lazySingleton<_i4.GoogleSignIn>(() => googleModule.dioInstance);
-    gh.lazySingleton<_i5.AddTransactionDataSource>(() =>
-        _i5.AddTransactionsDataSourceImpl(
-            gh<_i3.CollectionReference<Object?>>()));
-    gh.lazySingleton<_i6.AddTransactionsRepositories>(
-        () => _i7.AddTransactionsRepoImpl(gh<_i5.AddTransactionDataSource>()));
-    gh.lazySingleton<_i8.AddTransactionsUseCase>(() =>
-        _i8.AddTransactionsUseCase(gh<_i6.AddTransactionsRepositories>()));
+    gh.lazySingleton<_i5.TransactionDataSource>(() =>
+        _i5.TransactionsDataSourceImpl(gh<_i3.CollectionReference<Object?>>()));
+    gh.lazySingleton<_i6.TransactionsRepositories>(
+        () => _i7.TransactionsRepoImpl(gh<_i5.TransactionDataSource>()));
+    gh.lazySingleton<_i8.AddTransactionsUseCase>(
+        () => _i8.AddTransactionsUseCase(gh<_i6.TransactionsRepositories>()));
     gh.lazySingleton<_i9.AuthDataSource>(() => _i9.AuthDataSourceImpl(
           gh<_i4.GoogleSignIn>(),
           gh<_i3.CollectionReference<Object?>>(),
@@ -72,9 +75,13 @@ extension GetItInjectableX on _i1.GetIt {
     gh.factory<_i13.AuthenticationBloc>(
         () => _i13.AuthenticationBloc(gh<_i12.AuthUseCase>()));
     gh.factory<_i14.GetCategoriesUseCase>(
-        () => _i14.GetCategoriesUseCase(gh<_i6.AddTransactionsRepositories>()));
-    gh.factory<_i15.AddTransactionSheetCubit>(
-        () => _i15.AddTransactionSheetCubit(
+        () => _i14.GetCategoriesUseCase(gh<_i6.TransactionsRepositories>()));
+    gh.lazySingleton<_i15.GetTransactionsUsecase>(
+        () => _i15.GetTransactionsUsecase(gh<_i6.TransactionsRepositories>()));
+    gh.factory<_i16.HomeScreenBloc>(
+        () => _i16.HomeScreenBloc(gh<_i15.GetTransactionsUsecase>()));
+    gh.factory<_i17.AddTransactionSheetCubit>(
+        () => _i17.AddTransactionSheetCubit(
               gh<_i14.GetCategoriesUseCase>(),
               gh<_i8.AddTransactionsUseCase>(),
             ));
@@ -82,6 +89,6 @@ extension GetItInjectableX on _i1.GetIt {
   }
 }
 
-class _$MainCollectionRef extends _i16.MainCollectionRef {}
+class _$MainCollectionRef extends _i18.MainCollectionRef {}
 
-class _$GoogleModule extends _i17.GoogleModule {}
+class _$GoogleModule extends _i19.GoogleModule {}
