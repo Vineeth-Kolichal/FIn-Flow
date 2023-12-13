@@ -42,7 +42,7 @@ class AddTransactionSheetCubit extends Cubit<AddTransactionSheetState> {
     emit(state.copyWith(selected: seleted));
   }
 
-  void addTransaction(AddTransactionEntity transaction) {
+  void addTransaction(TransactionEntity transaction) {
     addTransactionsUseCase(AddParam(transaction)).then((resp) {
       resp.fold((fail) {
         emit(state.copyWith(

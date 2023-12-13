@@ -8,7 +8,7 @@ import '../../../../core/error/exception.dart';
 
 abstract class AddTransactionDataSource {
   Future<List<String>> getCategories(Cparams param);
-  Future<String> addTransaction(AddTransactionModel transactionModel);
+  Future<String> addTransaction(TransactionModel transactionModel);
 }
 
 @LazySingleton(as: AddTransactionDataSource)
@@ -36,7 +36,7 @@ class AddTransactionsDataSourceImpl implements AddTransactionDataSource {
   }
 
   @override
-  Future<String> addTransaction(AddTransactionModel transactionModel) async {
+  Future<String> addTransaction(TransactionModel transactionModel) async {
     try {
       final docRef = await mainCollectionRef
           .doc(uid)

@@ -191,7 +191,7 @@ mixin HomeHelper {
                           context
                               .read<AddTransactionSheetCubit>()
                               .addTransaction(
-                                AddTransactionEntity(
+                                TransactionEntity(
                                   amount: amount,
                                   isIncome: isIncome,
                                   category: category!,

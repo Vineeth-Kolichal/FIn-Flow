@@ -27,7 +27,7 @@ class AddTransactionsRepoImpl implements AddTransactionsRepositories {
   Future<Either<Failure, String>> addTransaction(AddParam addParm) async {
     try {
       final resp = await addTransactionDataSource
-          .addTransaction(AddTransactionModel.fromEntity(addParm.transaction));
+          .addTransaction(TransactionModel.fromEntity(addParm.transaction));
       return Right(resp);
     } on DataException catch (e) {
       return Left(AddDataFailure(e.error));

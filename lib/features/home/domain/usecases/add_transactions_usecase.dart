@@ -18,6 +18,6 @@ class AddTransactionsUseCase implements UseCase<String, AddParam> {
 }
 
 class AddParam {
-  AddTransactionEntity transaction;
+  TransactionEntity transaction;
   AddParam(this.transaction);
 }
