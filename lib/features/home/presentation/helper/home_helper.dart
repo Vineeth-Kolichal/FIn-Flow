@@ -10,6 +10,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 
 import '../bloc_and_cubits/add_transaction_sheet_cubit/add_transaction_sheet_cubit.dart';
+import '../bloc_and_cubits/home_screen_bloc/home_screen_bloc.dart';
 
 final formKey = GlobalKey<FormState>();
 mixin HomeHelper {
@@ -201,7 +202,16 @@ mixin HomeHelper {
                                       descriptionController.text.trim(),
                                 ),
                               );
-                          timeFrameSelected.value = 0;
+                          filter(
+                              currrentIndex: 0,
+                              filteredDate: (fromDate, toDate) {
+                                context.read<HomeScreenBloc>().add(
+                                      GetTransactions(
+                                        fromDate: fromDate,
+                                        toDate: toDate,
+                                      ),
+                                    );
+                              });
                           Navigator.of(context).pop();
                         }
                       },

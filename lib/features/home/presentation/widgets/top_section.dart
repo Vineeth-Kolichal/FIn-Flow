@@ -150,8 +150,8 @@ class SummeryContainer extends StatelessWidget with HomeHelper {
             height: 70,
             child: Center(
               child: Text(
-                (totolValue > 0) ? '₹$totolValue' : '₹${totolValue * -1}',
-                style: (totolValue > 0) ? txt35GreenB : txt35RedB,
+                (totolValue >= 0) ? '₹$totolValue' : '₹${totolValue * -1}',
+                style: (totolValue >= 0) ? txt35GreenB : txt35RedB,
               ),
             ),
           ),

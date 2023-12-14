@@ -44,6 +44,9 @@ class LoginScreen extends StatelessWidget {
                                   MaterialPageRoute(
                                       builder: (ctx) => HomeScreen()));
                             }
+                            if (state.err != null) {
+                              Navigator.of(context).pop();
+                            }
                           },
                           child: Center(
                             child:
