@@ -16,6 +16,7 @@ class AuthenticationBloc
     on<GoogleSignIn>((event, emit) async {
       await authUseCase(NoParams()).then((value) {
         value.fold((fail) {
+          print(fail.error);
           emit(state.copyWith(isLoginSuccess: false, err: fail.error));
         }, (success) {
           emit(state.copyWith(isLoginSuccess: true, err: null));

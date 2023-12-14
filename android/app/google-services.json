@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "934558866353",
-    "project_id": "finflow-dev-66b9d",
-    "storage_bucket": "finflow-dev-66b9d.appspot.com"
+    "project_number": "485697533580",
+    "project_id": "finflowdev-9ef6e",
+    "storage_bucket": "finflowdev-9ef6e.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:934558866353:android:29171c8462a469c0243b90",
+        "mobilesdk_app_id": "1:485697533580:android:2174ce045b6a16c46a6da9",
         "android_client_info": {
           "package_name": "com.ivarva.fin_flow"
         }
       },
       "oauth_client": [
         {
-          "client_id": "934558866353-h86udmalrmprg92s3g4r127drp5nn60b.apps.googleusercontent.com",
+          "client_id": "485697533580-qiko60nff8ubtj4us73c52uu0oficlhu.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCUwu1k-76pZzS6Vcd5ucFARw_mVlEwN94"
+          "current_key": "AIzaSyCbGMO_jGGSavqI3mO8ZCZWteErbgAL4MA"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "934558866353-h86udmalrmprg92s3g4r127drp5nn60b.apps.googleusercontent.com",
+              "client_id": "485697533580-qiko60nff8ubtj4us73c52uu0oficlhu.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
