@@ -7,12 +7,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:485697533580:android:2174ce045b6a16c46a6da9",
+        "mobilesdk_app_id": "1:485697533580:android:cae3c3ce1f146c246a6da9",
         "android_client_info": {
-          "package_name": "com.ivarva.fin_flow"
+          "package_name": "com.ivarvahosting.fin_flow.dev"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "485697533580-aaueupkkf7ufo43j1th8r32mns83k5f0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ivarvahosting.fin_flow.dev",
+            "certificate_hash": "21e4082a79a0d3f4dca231bb7b4eca3cd64416b4"
+          }
+        },
         {
           "client_id": "485697533580-qiko60nff8ubtj4us73c52uu0oficlhu.apps.googleusercontent.com",
           "client_type": 3

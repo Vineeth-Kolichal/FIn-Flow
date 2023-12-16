@@ -1,6 +1,6 @@
 import 'package:fin_flow/core/dependancy_injection/config/service_locator.dart';
 
-import 'package:fin_flow/firebase_options.dart';
+import 'package:fin_flow/firebase_options_prod.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
