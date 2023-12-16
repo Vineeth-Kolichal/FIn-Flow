@@ -27,7 +27,15 @@ class SplashScreen extends StatelessWidget {
       },
       child: Scaffold(
         body: Center(
-          child: Hero(tag: 'logo', child: Text("FinFlow")),
+          child: Hero(
+              tag: 'logo',
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Image.asset(
+                  'assets/images/fin_flow_icon.png',
+                  height: 120,
+                ),
+              )),
         ),
       ),
     );

@@ -5,6 +5,7 @@ import 'package:fin_flow/features/authentication/presentation/authentication_blo
 import 'package:fin_flow/features/home/presentation/pages/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -22,7 +23,10 @@ class LoginScreen extends StatelessWidget {
           child: Center(
             child: Hero(
               tag: 'logo',
-              child: Text('FinFlow'),
+              child: Image.asset(
+                'assets/images/fin_flow_logo.png',
+                height: 60,
+              ),
             ),
           ),
         ),
@@ -51,6 +55,15 @@ class LoginScreen extends StatelessWidget {
                                       builder: (ctx) => HomeScreen()));
                             }
                             if (state.err != null) {
+                              Fluttertoast.showToast(
+                                msg: "${state.err}",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.CENTER,
+                                timeInSecForIosWeb: 1,
+                                backgroundColor: AppTheme.blackColor,
+                                textColor: AppTheme.whiteColor,
+                                fontSize: 12.0,
+                              );
                               Navigator.of(context).pop();
                             }
                           },

@@ -63,6 +63,12 @@ dev_dependencies:
   build_runner: ^2.4.7
   freezed: ^2.4.5
   injectable_generator: ^2.4.1
+  flutter_launcher_icons: "^0.13.1"
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/fin_flow_icon.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -80,6 +86,8 @@ flutter:
     - assets/images/
     - assets/images/chart.png
     - assets/images/google.png
+    - assets/images/fin_flow_logo.png
+    - assets/images/fin_flow_icon.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

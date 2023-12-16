@@ -37,7 +37,12 @@ class HomeScreen extends StatelessWidget with HomeHelper {
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Hero(tag: 'logo', child: Text('FinFlow')),
+            Hero(
+                tag: 'logo',
+                child: Image.asset(
+                  'assets/images/fin_flow_logo.png',
+                  height: 30,
+                )),
           ],
         ),
         actions: [
