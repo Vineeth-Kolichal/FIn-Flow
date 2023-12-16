@@ -13,15 +13,24 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
   GetTransactionsUsecase getTransactionsUsecase;
   HomeScreenBloc(this.getTransactionsUsecase)
       : super(HomeScreenState.initial()) {
-    on<HomeScreenEvent>((event, emit) async {
+    on<GetTransactions>((event, emit) async {
       final resp = await getTransactionsUsecase(
           DateParams(fromDate: event.fromDate, toDate: event.toDate));
       final newState = resp.fold((fail) {
-        return state
-            .copyWith(isLoading: false, error: fail.error, transactionList: []);
+        return state.copyWith(
+            isLoading: false,
+            error: fail.error,
+            transactionList: [],
+            dErr: null,
+            dSuccess: null);
       }, (data) {
         return state.copyWith(
-            isLoading: false, error: null, transactionList: data);
+          isLoading: false,
+          error: null,
+          transactionList: data,
+          dErr: null,
+          dSuccess: null,
+        );
       });
       emit(newState);
     });

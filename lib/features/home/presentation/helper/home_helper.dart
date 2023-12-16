@@ -3,7 +3,6 @@ import 'package:fin_flow/core/theme/app_theme.dart';
 import 'package:fin_flow/core/theme/text_styles.dart';
 import 'package:fin_flow/features/home/domain/entities/transaction_entity.dart';
 import 'package:fin_flow/features/home/presentation/pages/home_screen.dart';
-import 'package:fin_flow/features/home/presentation/widgets/top_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -106,6 +105,17 @@ mixin HomeHelper {
                           if (state.successMsg != null) {
                             Fluttertoast.showToast(
                               msg: "${state.successMsg}",
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.CENTER,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor: AppTheme.blackColor,
+                              textColor: AppTheme.whiteColor,
+                              fontSize: 12.0,
+                            );
+                          }
+                          if (state.err != null) {
+                            Fluttertoast.showToast(
+                              msg: "${state.err}",
                               toastLength: Toast.LENGTH_SHORT,
                               gravity: ToastGravity.CENTER,
                               timeInSecForIosWeb: 1,

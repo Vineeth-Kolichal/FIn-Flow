@@ -76,7 +76,7 @@ class TransactionsDataSourceImpl implements TransactionDataSource {
   @override
   Future<String> addCategory(AddCategoryParam param) async {
     try {
-      final doc = await mainCollectionRef
+      await mainCollectionRef
           .doc(uid)
           .collection('Categories')
           .add({"name": param.category, "type": param.type});
