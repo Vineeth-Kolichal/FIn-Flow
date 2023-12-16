@@ -99,7 +99,7 @@ class HomeScreen extends StatelessWidget with HomeHelper {
                       child: SizedBox(
                         height: size.width,
                         width: size.width,
-                        child: Center(
+                        child: const Center(
                           child: Text('Transaction list is empty'),
                         ),
                       ),
@@ -155,13 +155,13 @@ class TransactionListTile extends StatelessWidget with HomeHelper {
               icon: Icons.delete,
               label: 'Delete',
             ),
-            SlidableAction(
-              onPressed: (_) {},
-              backgroundColor: AppTheme.whiteColor,
-              foregroundColor: AppTheme.greyColor,
-              icon: Icons.edit,
-              label: 'Edit',
-            ),
+            // SlidableAction(
+            //   onPressed: (_) {},
+            //   backgroundColor: AppTheme.whiteColor,
+            //   foregroundColor: AppTheme.greyColor,
+            //   icon: Icons.edit,
+            //   label: 'Edit',
+            // ),
           ],
         ),
         child: Container(

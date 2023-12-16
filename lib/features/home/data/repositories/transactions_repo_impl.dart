@@ -5,6 +5,7 @@ import 'package:fin_flow/features/home/data/datasources/transactions_data_source
 import 'package:fin_flow/features/home/data/models/transaction_model.dart';
 import 'package:fin_flow/features/home/domain/entities/transaction_entity.dart';
 import 'package:fin_flow/features/home/domain/repositories/transactions_repo.dart';
+import 'package:fin_flow/features/home/domain/usecases/add_category_usecase.dart';
 import 'package:fin_flow/features/home/domain/usecases/add_transactions_usecase.dart';
 import 'package:fin_flow/features/home/domain/usecases/get_categories_usecase.dart';
 import 'package:fin_flow/features/home/domain/usecases/get_transactions_usecase.dart';
@@ -43,6 +44,17 @@ class TransactionsRepoImpl implements TransactionsRepositories {
       List<TransactionEntity> transactionData =
           await transactionDataSource.getTransactions(params);
       return Right(transactionData);
+    } on DataException catch (e) {
+      return Left(AddDataFailure(e.error));
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> addCategory(AddCategoryParam param) async {
+    try {
+      final resp = await transactionDataSource.addCategory(param);
+
+      return Right(resp);
     } on DataException catch (e) {
       return Left(AddDataFailure(e.error));
     }

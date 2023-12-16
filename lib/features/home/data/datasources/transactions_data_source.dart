@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fin_flow/features/home/data/models/transaction_model.dart';
+import 'package:fin_flow/features/home/domain/usecases/add_category_usecase.dart';
 import 'package:fin_flow/features/home/domain/usecases/get_categories_usecase.dart';
 import 'package:fin_flow/features/home/domain/usecases/get_transactions_usecase.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -11,6 +12,7 @@ abstract class TransactionDataSource {
   Future<List<String>> getCategories(Cparams param);
   Future<String> addTransaction(TransactionModel transactionModel);
   Future<List<TransactionModel>> getTransactions(DateParams params);
+  Future<String> addCategory(AddCategoryParam param);
 }
 
 @LazySingleton(as: TransactionDataSource)
@@ -68,6 +70,19 @@ class TransactionsDataSourceImpl implements TransactionDataSource {
       return transactionList.reversed.toList();
     } on FirebaseException catch (e) {
       throw DataException('${e.message}');
+    }
+  }
+
+  @override
+  Future<String> addCategory(AddCategoryParam param) async {
+    try {
+      final doc = await mainCollectionRef
+          .doc(uid)
+          .collection('Categories')
+          .add({"name": param.category, "type": param.type});
+      return " '${param.category}' added as ${param.type} category";
+    } catch (e) {
+      throw DataException(e.toString());
     }
   }
 }

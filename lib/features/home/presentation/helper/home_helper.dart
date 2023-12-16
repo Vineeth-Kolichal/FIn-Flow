@@ -188,9 +188,6 @@ mixin HomeHelper {
                           bool isIncome =
                               typeNotifier.value == TransactionType.income;
 
-                          print(
-                              '$amount, $isIncome, ${descriptionController.text},$category');
-
                           context
                               .read<AddTransactionSheetCubit>()
                               .addTransaction(
@@ -231,6 +228,7 @@ mixin HomeHelper {
   }
 
   Future<dynamic> addCategoryDialoge(BuildContext context) {
+    TextEditingController controller = TextEditingController();
     return showDialog(
       context: context,
       builder: (ctx) {
@@ -244,6 +242,7 @@ mixin HomeHelper {
             mainAxisSize: MainAxisSize.min,
             children: [
               TextFormField(
+                controller: controller,
                 decoration: InputDecoration(
                     hintText: "Category name",
                     contentPadding: const EdgeInsets.symmetric(horizontal: 10),
@@ -263,9 +262,9 @@ mixin HomeHelper {
                             groupValue: type,
                             onChanged: (value) {
                               typeNotifier.value = value;
-                              context
-                                  .read<AddTransactionSheetCubit>()
-                                  .getCategories(value!);
+                              // context
+                              //     .read<AddTransactionSheetCubit>()
+                              //     .getCategories(value!);
                             },
                           ),
                           const Text('Income')
@@ -299,7 +298,17 @@ mixin HomeHelper {
               child: const Text("Cancel"),
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                if (typeNotifier.value != null) {
+                  context.read<AddTransactionSheetCubit>().addCategory(
+                        type: typeNotifier.value == TransactionType.expence
+                            ? "expence"
+                            : "income",
+                        name: controller.text.trim(),
+                      );
+                  Navigator.of(context).pop();
+                }
+              },
               style: ElevatedButton.styleFrom(
                   backgroundColor: AppTheme.blackColor),
               child: const Text(

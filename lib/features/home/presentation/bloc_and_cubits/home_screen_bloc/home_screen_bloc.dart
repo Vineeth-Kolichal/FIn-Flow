@@ -17,10 +17,8 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
       final resp = await getTransactionsUsecase(
           DateParams(fromDate: event.fromDate, toDate: event.toDate));
       final newState = resp.fold((fail) {
-        return state.copyWith(
-          isLoading: false,
-          error: fail.error,
-        );
+        return state
+            .copyWith(isLoading: false, error: fail.error, transactionList: []);
       }, (data) {
         return state.copyWith(
             isLoading: false, error: null, transactionList: data);
