@@ -27,7 +27,7 @@ class SplashScreen extends StatelessWidget {
       },
       child: Scaffold(
         body: Center(
-          child: Text("FinFlow"),
+          child: Hero(tag: 'logo', child: Text("FinFlow")),
         ),
       ),
     );

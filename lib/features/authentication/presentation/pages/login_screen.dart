@@ -19,6 +19,12 @@ class LoginScreen extends StatelessWidget {
         SizedBox(
           height: size.height,
           width: size.width,
+          child: Center(
+            child: Hero(
+              tag: 'logo',
+              child: Text('FinFlow'),
+            ),
+          ),
         ),
         Align(
           alignment: Alignment.bottomCenter,
