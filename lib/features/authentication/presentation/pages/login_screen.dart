@@ -50,6 +50,7 @@ class LoginScreen extends StatelessWidget {
                             AuthenticationState>(
                           listener: (context, state) {
                             if (state.isLoginSuccess) {
+                              Navigator.of(context).pop();
                               Navigator.of(context).pushReplacement(
                                   MaterialPageRoute(
                                       builder: (ctx) => HomeScreen()));
