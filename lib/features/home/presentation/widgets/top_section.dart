@@ -4,6 +4,7 @@ import 'package:fin_flow/core/theme/text_styles.dart';
 import 'package:fin_flow/features/home/domain/entities/transaction_entity.dart';
 import 'package:fin_flow/features/home/presentation/bloc_and_cubits/home_screen_bloc/home_screen_bloc.dart';
 import 'package:fin_flow/features/home/presentation/helper/home_helper.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -31,6 +32,12 @@ class TopSection extends StatelessWidget with HomeHelper {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Text(greeting()),
+                Text(
+                  FirebaseAuth.instance.currentUser?.displayName ?? "User",
+                  style: txt16BlackB,
+                ),
+                Space.y(15),
                 Row(
                     children: List.generate(
                   selectionTitle.length,
@@ -77,7 +84,7 @@ class TopSection extends StatelessWidget with HomeHelper {
                 Space.y(10),
                 SummeryContainer(transactions: transactionList),
                 Space.y(10),
-                Text('Transactions')
+                const Text('Transactions')
               ],
             );
           }),

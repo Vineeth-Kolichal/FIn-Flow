@@ -5,11 +5,14 @@ import 'package:fin_flow/core/theme/text_styles.dart';
 import 'package:fin_flow/features/home/domain/entities/transaction_entity.dart';
 import 'package:fin_flow/features/home/presentation/bloc_and_cubits/home_screen_bloc/home_screen_bloc.dart';
 import 'package:fin_flow/features/home/presentation/helper/home_helper.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 import '../widgets/top_section.dart';
+
+enum ProfilePopUpItem { manageCategory, logout }
 
 class HomeScreen extends StatelessWidget with HomeHelper {
   const HomeScreen({super.key});
@@ -48,7 +51,35 @@ class HomeScreen extends StatelessWidget with HomeHelper {
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: CircleAvatar(),
+            child: PopupMenuButton<ProfilePopUpItem>(
+                onSelected: (selected) {},
+                child: CircleAvatar(
+                  radius: 17,
+                  backgroundImage: NetworkImage(FirebaseAuth
+                          .instance.currentUser?.photoURL ??
+                      'https://www.sunsetlearning.com/wp-content/uploads/2019/09/User-Icon-Grey-300x300.png'),
+                ),
+                itemBuilder: (ctx) {
+                  return [
+                    const PopupMenuItem<ProfilePopUpItem>(
+                      value: ProfilePopUpItem.manageCategory,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('Manage Categories'),
+                          Icon(Icons.settings_applications_sharp)
+                        ],
+                      ),
+                    ),
+                    const PopupMenuItem<ProfilePopUpItem>(
+                      value: ProfilePopUpItem.logout,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [Text('Logout'), Icon(Icons.logout)],
+                      ),
+                    ),
+                  ];
+                }),
           )
         ],
       ),
