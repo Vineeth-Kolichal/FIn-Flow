@@ -4,4 +4,5 @@ part of 'authentication_bloc.dart';
 class AuthenticationEvent with _$AuthenticationEvent {
   const factory AuthenticationEvent.started() = _Started;
   const factory AuthenticationEvent.googleSignIn()=GoogleSignIn;
+  const factory AuthenticationEvent.logout()=Logout;
 }

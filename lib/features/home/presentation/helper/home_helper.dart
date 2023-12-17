@@ -1,6 +1,8 @@
 import 'package:fin_flow/common/widgets/space.dart';
 import 'package:fin_flow/core/theme/app_theme.dart';
 import 'package:fin_flow/core/theme/text_styles.dart';
+import 'package:fin_flow/features/authentication/presentation/authentication_bloc/authentication_bloc.dart';
+import 'package:fin_flow/features/authentication/presentation/pages/login_screen.dart';
 import 'package:fin_flow/features/home/domain/entities/transaction_entity.dart';
 import 'package:fin_flow/features/home/presentation/pages/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -412,5 +414,38 @@ mixin HomeHelper {
     } else {
       return "Good night!";
     }
+  }
+
+  Future<dynamic> logoutDialoge(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (ctx) {
+          return AlertDialog(
+            title: const Text('Are you sure?'),
+            content:
+                const Text("To confirm logout click 'Yes' else click 'No'"),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text("No")),
+              ElevatedButton(
+                onPressed: () {
+                  context.read<AuthenticationBloc>().add(const Logout());
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(builder: (ctx) => const LoginScreen()),
+                      (route) => false);
+                },
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: AppTheme.blackColor),
+                child: const Text(
+                  "Yes",
+                  style: txt14WhiteB,
+                ),
+              )
+            ],
+          );
+        });
   }
 }

@@ -52,7 +52,11 @@ class HomeScreen extends StatelessWidget with HomeHelper {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: PopupMenuButton<ProfilePopUpItem>(
-                onSelected: (selected) {},
+                onSelected: (selected) {
+                  if (selected == ProfilePopUpItem.logout) {
+                    logoutDialoge(context);
+                  }
+                },
                 child: CircleAvatar(
                   radius: 17,
                   backgroundImage: NetworkImage(FirebaseAuth

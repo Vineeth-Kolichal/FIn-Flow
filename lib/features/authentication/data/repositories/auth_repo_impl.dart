@@ -22,8 +22,12 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   @override
-  Future<Either<Failure, void>> logout() {
-    // TODO: implement logout
-    throw UnimplementedError();
+  Future<Either<Failure, String>> logout() async {
+    try {
+      final msg = await authDataSource.logout();
+      return Right(msg);
+    } on AuthException catch (e) {
+      return Left(Failure.authError(e.error));
+    }
   }
 }

@@ -6,6 +6,7 @@ import 'package:injectable/injectable.dart';
 
 abstract class AuthDataSource {
   Future<String> googleLogin();
+  Future<String> logout();
 }
 
 @LazySingleton(as: AuthDataSource)
@@ -57,6 +58,26 @@ class AuthDataSourceImpl implements AuthDataSource {
       return "Success";
     } on FirebaseAuthException catch (exception) {
       throw AuthException(exception.message ?? "Auth failed");
+    }
+  }
+
+  @override
+  Future<String> logout() async {
+    final currentUser = FirebaseAuth.instance.currentUser;
+    try {
+      await FirebaseAuth.instance.signOut();
+
+      final GoogleSignInAccount? googleSignInAccount = googleSignIn.currentUser;
+      if (googleSignInAccount != null) {
+        await googleSignInAccount.clearAuthCache();
+      }
+      if (currentUser?.providerData[0].providerId ==
+          GoogleAuthProvider.GOOGLE_SIGN_IN_METHOD) {
+        await googleSignIn.disconnect();
+      }
+      return "Successfully logged out";
+    } on FirebaseAuthException catch (exception) {
+      throw AuthException(exception.message ?? "Logout failed");
     }
   }
 }
