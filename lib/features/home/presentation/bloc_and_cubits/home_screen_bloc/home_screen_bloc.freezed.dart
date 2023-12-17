@@ -20,19 +20,19 @@ mixin _$HomeScreenEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(DateTime fromDate, DateTime toDate)
         getTransactions,
-    required TResult Function(String id) deleteTransaction,
+    required TResult Function(TransactionEntity entity) deleteTransaction,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(DateTime fromDate, DateTime toDate)? getTransactions,
-    TResult? Function(String id)? deleteTransaction,
+    TResult? Function(TransactionEntity entity)? deleteTransaction,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(DateTime fromDate, DateTime toDate)? getTransactions,
-    TResult Function(String id)? deleteTransaction,
+    TResult Function(TransactionEntity entity)? deleteTransaction,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -151,7 +151,7 @@ class _$GetTransactionsImpl implements GetTransactions {
   TResult when<TResult extends Object?>({
     required TResult Function(DateTime fromDate, DateTime toDate)
         getTransactions,
-    required TResult Function(String id) deleteTransaction,
+    required TResult Function(TransactionEntity entity) deleteTransaction,
   }) {
     return getTransactions(fromDate, toDate);
   }
@@ -160,7 +160,7 @@ class _$GetTransactionsImpl implements GetTransactions {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(DateTime fromDate, DateTime toDate)? getTransactions,
-    TResult? Function(String id)? deleteTransaction,
+    TResult? Function(TransactionEntity entity)? deleteTransaction,
   }) {
     return getTransactions?.call(fromDate, toDate);
   }
@@ -169,7 +169,7 @@ class _$GetTransactionsImpl implements GetTransactions {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(DateTime fromDate, DateTime toDate)? getTransactions,
-    TResult Function(String id)? deleteTransaction,
+    TResult Function(TransactionEntity entity)? deleteTransaction,
     required TResult orElse(),
   }) {
     if (getTransactions != null) {
@@ -228,7 +228,7 @@ abstract class _$$DeleteTransactionImplCopyWith<$Res> {
           $Res Function(_$DeleteTransactionImpl) then) =
       __$$DeleteTransactionImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String id});
+  $Res call({TransactionEntity entity});
 }
 
 /// @nodoc
@@ -242,13 +242,13 @@ class __$$DeleteTransactionImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? entity = null,
   }) {
     return _then(_$DeleteTransactionImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
+      entity: null == entity
+          ? _value.entity
+          : entity // ignore: cast_nullable_to_non_nullable
+              as TransactionEntity,
     ));
   }
 }
@@ -256,14 +256,14 @@ class __$$DeleteTransactionImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$DeleteTransactionImpl implements DeleteTransaction {
-  const _$DeleteTransactionImpl({required this.id});
+  const _$DeleteTransactionImpl({required this.entity});
 
   @override
-  final String id;
+  final TransactionEntity entity;
 
   @override
   String toString() {
-    return 'HomeScreenEvent.deleteTransaction(id: $id)';
+    return 'HomeScreenEvent.deleteTransaction(entity: $entity)';
   }
 
   @override
@@ -271,11 +271,11 @@ class _$DeleteTransactionImpl implements DeleteTransaction {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DeleteTransactionImpl &&
-            (identical(other.id, id) || other.id == id));
+            (identical(other.entity, entity) || other.entity == entity));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id);
+  int get hashCode => Object.hash(runtimeType, entity);
 
   @JsonKey(ignore: true)
   @override
@@ -289,29 +289,29 @@ class _$DeleteTransactionImpl implements DeleteTransaction {
   TResult when<TResult extends Object?>({
     required TResult Function(DateTime fromDate, DateTime toDate)
         getTransactions,
-    required TResult Function(String id) deleteTransaction,
+    required TResult Function(TransactionEntity entity) deleteTransaction,
   }) {
-    return deleteTransaction(id);
+    return deleteTransaction(entity);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(DateTime fromDate, DateTime toDate)? getTransactions,
-    TResult? Function(String id)? deleteTransaction,
+    TResult? Function(TransactionEntity entity)? deleteTransaction,
   }) {
-    return deleteTransaction?.call(id);
+    return deleteTransaction?.call(entity);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(DateTime fromDate, DateTime toDate)? getTransactions,
-    TResult Function(String id)? deleteTransaction,
+    TResult Function(TransactionEntity entity)? deleteTransaction,
     required TResult orElse(),
   }) {
     if (deleteTransaction != null) {
-      return deleteTransaction(id);
+      return deleteTransaction(entity);
     }
     return orElse();
   }
@@ -349,10 +349,10 @@ class _$DeleteTransactionImpl implements DeleteTransaction {
 }
 
 abstract class DeleteTransaction implements HomeScreenEvent {
-  const factory DeleteTransaction({required final String id}) =
+  const factory DeleteTransaction({required final TransactionEntity entity}) =
       _$DeleteTransactionImpl;
 
-  String get id;
+  TransactionEntity get entity;
   @JsonKey(ignore: true)
   _$$DeleteTransactionImplCopyWith<_$DeleteTransactionImpl> get copyWith =>
       throw _privateConstructorUsedError;

@@ -7,6 +7,7 @@ import 'package:fin_flow/features/home/domain/entities/transaction_entity.dart';
 import 'package:fin_flow/features/home/domain/repositories/transactions_repo.dart';
 import 'package:fin_flow/features/home/domain/usecases/add_category_usecase.dart';
 import 'package:fin_flow/features/home/domain/usecases/add_transactions_usecase.dart';
+import 'package:fin_flow/features/home/domain/usecases/delete_transactions_usecase.dart';
 import 'package:fin_flow/features/home/domain/usecases/get_categories_usecase.dart';
 import 'package:fin_flow/features/home/domain/usecases/get_transactions_usecase.dart';
 import 'package:injectable/injectable.dart';
@@ -54,6 +55,16 @@ class TransactionsRepoImpl implements TransactionsRepositories {
     try {
       final resp = await transactionDataSource.addCategory(param);
 
+      return Right(resp);
+    } on DataException catch (e) {
+      return Left(AddDataFailure(e.error));
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> deleteTransaction(DeleteParam param) async {
+    try {
+      final resp = await transactionDataSource.deleteTransaction(param);
       return Right(resp);
     } on DataException catch (e) {
       return Left(AddDataFailure(e.error));

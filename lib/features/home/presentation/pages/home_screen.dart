@@ -9,6 +9,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import '../widgets/top_section.dart';
 
@@ -188,12 +189,42 @@ class TransactionListTile extends StatelessWidget with HomeHelper {
         startActionPane: ActionPane(
           motion: const ScrollMotion(),
           children: [
-            SlidableAction(
-              onPressed: (_) {},
-              backgroundColor: AppTheme.whiteColor,
-              foregroundColor: AppTheme.greyColor,
-              icon: Icons.delete,
-              label: 'Delete',
+            BlocListener<HomeScreenBloc, HomeScreenState>(
+              listener: (context, state) {
+                if (state.dErr != null) {
+                  Fluttertoast.showToast(
+                    msg: "${state.dErr}",
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.BOTTOM,
+                    timeInSecForIosWeb: 1,
+                    backgroundColor: AppTheme.blackColor,
+                    textColor: AppTheme.whiteColor,
+                    fontSize: 12.0,
+                  );
+                }
+                if (state.dSuccess != null) {
+                  Fluttertoast.showToast(
+                    msg: "${state.dSuccess}",
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.BOTTOM,
+                    timeInSecForIosWeb: 1,
+                    backgroundColor: AppTheme.blackColor,
+                    textColor: AppTheme.whiteColor,
+                    fontSize: 12.0,
+                  );
+                }
+              },
+              child: SlidableAction(
+                onPressed: (_) {
+                  context
+                      .read<HomeScreenBloc>()
+                      .add(DeleteTransaction(entity: data));
+                },
+                backgroundColor: AppTheme.whiteColor,
+                foregroundColor: AppTheme.greyColor,
+                icon: Icons.delete,
+                label: 'Delete',
+              ),
             ),
             // SlidableAction(
             //   onPressed: (_) {},

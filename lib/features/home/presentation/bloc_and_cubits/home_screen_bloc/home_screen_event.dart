@@ -7,6 +7,6 @@ class HomeScreenEvent with _$HomeScreenEvent {
     required DateTime toDate,
   }) = GetTransactions;
 
-  const factory HomeScreenEvent.deleteTransaction({required String id}) =
+  const factory HomeScreenEvent.deleteTransaction({required TransactionEntity entity}) =
       DeleteTransaction;
 }

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fin_flow/features/home/data/models/transaction_model.dart';
 import 'package:fin_flow/features/home/domain/usecases/add_category_usecase.dart';
+import 'package:fin_flow/features/home/domain/usecases/delete_transactions_usecase.dart';
 import 'package:fin_flow/features/home/domain/usecases/get_categories_usecase.dart';
 import 'package:fin_flow/features/home/domain/usecases/get_transactions_usecase.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -13,6 +14,7 @@ abstract class TransactionDataSource {
   Future<String> addTransaction(TransactionModel transactionModel);
   Future<List<TransactionModel>> getTransactions(DateParams params);
   Future<String> addCategory(AddCategoryParam param);
+  Future<String> deleteTransaction(DeleteParam param);
 }
 
 @LazySingleton(as: TransactionDataSource)
@@ -83,6 +85,20 @@ class TransactionsDataSourceImpl implements TransactionDataSource {
       return " '${param.category}' added as ${param.type} category";
     } catch (e) {
       throw DataException(e.toString());
+    }
+  }
+
+  @override
+  Future<String> deleteTransaction(DeleteParam param) async {
+    try {
+      await mainCollectionRef
+          .doc(uid)
+          .collection('Transactions')
+          .doc(param.id)
+          .delete();
+      return "Transaction deleted";
+    } on FirebaseException catch (e) {
+      throw DataException('${e.message}');
     }
   }
 }
