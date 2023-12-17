@@ -38,9 +38,9 @@ class TopSection extends StatelessWidget with HomeHelper {
                     borderRadius: BorderRadius.circular(90),
                     onTap: () {
                       timeFrameSelected.value = index;
-                      if (value == 0 || value == 1) {
+                      if (index == 0 || index == 1) {
                         filter(
-                            currrentIndex: value,
+                            currrentIndex: index,
                             filteredDate: (fromDate, toDate) {
                               context.read<HomeScreenBloc>().add(
                                   GetTransactions(

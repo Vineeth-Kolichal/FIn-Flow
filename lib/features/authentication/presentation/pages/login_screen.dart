@@ -53,13 +53,13 @@ class LoginScreen extends StatelessWidget {
                               Navigator.of(context).pop();
                               Navigator.of(context).pushReplacement(
                                   MaterialPageRoute(
-                                      builder: (ctx) => HomeScreen()));
+                                      builder: (ctx) => const HomeScreen()));
                             }
                             if (state.err != null) {
                               Fluttertoast.showToast(
                                 msg: "${state.err}",
                                 toastLength: Toast.LENGTH_SHORT,
-                                gravity: ToastGravity.CENTER,
+                                gravity: ToastGravity.BOTTOM,
                                 timeInSecForIosWeb: 1,
                                 backgroundColor: AppTheme.blackColor,
                                 textColor: AppTheme.whiteColor,

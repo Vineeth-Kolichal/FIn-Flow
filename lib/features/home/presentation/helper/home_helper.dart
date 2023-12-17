@@ -106,7 +106,7 @@ mixin HomeHelper {
                             Fluttertoast.showToast(
                               msg: "${state.successMsg}",
                               toastLength: Toast.LENGTH_SHORT,
-                              gravity: ToastGravity.CENTER,
+                              gravity: ToastGravity.BOTTOM,
                               timeInSecForIosWeb: 1,
                               backgroundColor: AppTheme.blackColor,
                               textColor: AppTheme.whiteColor,
@@ -117,7 +117,7 @@ mixin HomeHelper {
                             Fluttertoast.showToast(
                               msg: "${state.err}",
                               toastLength: Toast.LENGTH_SHORT,
-                              gravity: ToastGravity.CENTER,
+                              gravity: ToastGravity.BOTTOM,
                               timeInSecForIosWeb: 1,
                               backgroundColor: AppTheme.blackColor,
                               textColor: AppTheme.whiteColor,
