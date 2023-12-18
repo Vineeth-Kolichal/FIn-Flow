@@ -91,7 +91,7 @@ mixin HomeHelper {
                                       .getCategories(value!);
                                 },
                               ),
-                              const Text('Expence')
+                              const Text('Expense')
                             ],
                           ),
                         ],
@@ -295,7 +295,7 @@ mixin HomeHelper {
                                   .getCategories(value!);
                             },
                           ),
-                          const Text('Expence')
+                          const Text('Expense')
                         ],
                       ),
                     ],
