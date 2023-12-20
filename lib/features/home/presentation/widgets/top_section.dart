@@ -143,7 +143,8 @@ class SummeryContainer extends StatelessWidget with HomeHelper {
                     }
                     return Text(
                       title,
-                      style: txt16BlackB,
+                      style: theme.textTheme.bodyLarge
+                          ?.copyWith(fontWeight: FontWeight.w800),
                     );
                   }),
               InkWell(

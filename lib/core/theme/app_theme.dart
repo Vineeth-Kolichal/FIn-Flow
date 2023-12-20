@@ -8,6 +8,8 @@ class FinFlowTheme {
     useMaterial3: true,
     fontFamily: GoogleFonts.poppins().fontFamily,
     canvasColor: whiteColor,
+    radioTheme:
+        RadioThemeData(fillColor: MaterialStateProperty.all<Color>(darkGrey2)),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: blackColor,
@@ -55,6 +57,7 @@ class FinFlowTheme {
   static const Color scaffoldBgDark = Color.fromARGB(255, 19, 18, 18);
   static const Color whiteColor = Colors.white;
   static const Color blackColor = Colors.black;
+  static const Color darkGrey2 = Color.fromARGB(255, 32, 32, 32);
   static const Color greyColor = Colors.grey;
   static const Color blueColor = Colors.blue;
   static const Color greenColor = Colors.green;

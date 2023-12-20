@@ -250,14 +250,16 @@ mixin HomeHelper {
 
   Future<dynamic> addCategoryDialoge(BuildContext context) {
     TextEditingController controller = TextEditingController();
+    ThemeData theme = Theme.of(context);
+
     return showDialog(
       context: context,
       builder: (ctx) {
         ValueNotifier<TransactionType?> typeNotifier = ValueNotifier(null);
         return AlertDialog(
-          title: const Text(
+          title: Text(
             'Add Category',
-            style: txt14Black,
+            style: theme.textTheme.titleMedium,
           ),
           content: Column(
             mainAxisSize: MainAxisSize.min,
