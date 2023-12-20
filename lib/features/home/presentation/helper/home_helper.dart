@@ -20,6 +20,7 @@ mixin HomeHelper {
     TextEditingController amountController = TextEditingController();
     TextEditingController descriptionController = TextEditingController();
     String? category;
+    ThemeData theme = Theme.of(context);
     return showModalBottomSheet(
       showDragHandle: true,
       isScrollControlled: true,
@@ -35,9 +36,10 @@ mixin HomeHelper {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Text(
+                  Text(
                     'Add Transaction',
-                    style: txt16BlackB,
+                    style: theme.textTheme.labelLarge
+                        ?.copyWith(fontSize: 16, fontWeight: FontWeight.w800),
                   ),
                   Space.y(10),
                   TextFormField(
@@ -187,12 +189,19 @@ mixin HomeHelper {
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: FinFlowTheme.blackColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+                      style: theme.elevatedButtonTheme.style?.copyWith(
+                        shape: MaterialStateProperty.all<OutlinedBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
                         ),
                       ),
+                      // style: ElevatedButton.styleFrom(
+                      //   backgroundColor: FinFlowTheme.blackColor,
+                      //   shape: RoundedRectangleBorder(
+                      //     borderRadius: BorderRadius.circular(10),
+                      //   ),
+                      // ),
                       onPressed: () {
                         if (formKey.currentState!.validate()) {
                           double amount =
@@ -224,9 +233,9 @@ mixin HomeHelper {
                           Navigator.of(context).pop();
                         }
                       },
-                      child: const Text(
+                      child: Text(
                         "Add Transaction",
-                        style: txt14WhiteB,
+                        style: theme.textTheme.labelMedium,
                       ),
                     ),
                   )

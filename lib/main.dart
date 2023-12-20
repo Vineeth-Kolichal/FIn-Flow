@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 import 'fin_flow_app.dart';
 
+ValueNotifier<bool> isDark = ValueNotifier(false);
 Future<void> main() async {
   print('prod');
   WidgetsFlutterBinding.ensureInitialized();

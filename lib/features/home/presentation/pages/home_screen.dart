@@ -5,6 +5,7 @@ import 'package:fin_flow/core/theme/text_styles.dart';
 import 'package:fin_flow/features/home/domain/entities/transaction_entity.dart';
 import 'package:fin_flow/features/home/presentation/bloc_and_cubits/home_screen_bloc/home_screen_bloc.dart';
 import 'package:fin_flow/features/home/presentation/helper/home_helper.dart';
+import 'package:fin_flow/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,7 +14,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 import '../widgets/top_section.dart';
 
-enum ProfilePopUpItem { manageCategory, logout }
+enum ProfilePopUpItem { manageCategory, changeTheme, logout }
 
 class HomeScreen extends StatelessWidget with HomeHelper {
   const HomeScreen({super.key});
@@ -36,6 +37,7 @@ class HomeScreen extends StatelessWidget with HomeHelper {
       //     toDate: DateTime.now()));
     });
     Size size = MediaQuery.of(context).size;
+    ThemeData theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Column(
@@ -57,6 +59,9 @@ class HomeScreen extends StatelessWidget with HomeHelper {
                   if (selected == ProfilePopUpItem.logout) {
                     logoutDialoge(context);
                   }
+                  if (selected == ProfilePopUpItem.changeTheme) {
+                    isDark.value = !isDark.value;
+                  }
                 },
                 child: CircleAvatar(
                   radius: 17,
@@ -75,6 +80,24 @@ class HomeScreen extends StatelessWidget with HomeHelper {
                           Icon(Icons.settings_applications_sharp)
                         ],
                       ),
+                    ),
+                    PopupMenuItem<ProfilePopUpItem>(
+                      value: ProfilePopUpItem.changeTheme,
+                      child: ValueListenableBuilder(
+                          valueListenable: isDark,
+                          builder: (context, isDark, _) {
+                            return Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(isDark
+                                    ? 'Switch to Light theme'
+                                    : "Switch to Dark theme"),
+                                Icon(isDark
+                                    ? Icons.light_mode_rounded
+                                    : Icons.dark_mode_rounded)
+                              ],
+                            );
+                          }),
                     ),
                     const PopupMenuItem<ProfilePopUpItem>(
                       value: ProfilePopUpItem.logout,
@@ -157,7 +180,9 @@ class HomeScreen extends StatelessWidget with HomeHelper {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: FinFlowTheme.blackColor,
+        backgroundColor: theme.brightness == Brightness.light
+            ? FinFlowTheme.blackColor
+            : null,
         onPressed: () {
           addTransactionSheet(context);
         },
@@ -180,6 +205,7 @@ class TransactionListTile extends StatelessWidget with HomeHelper {
 
   @override
   Widget build(BuildContext context) {
+    ThemeData theme = Theme.of(context);
     return Padding(
       padding: const EdgeInsets.symmetric(
         vertical: 5,
@@ -220,7 +246,7 @@ class TransactionListTile extends StatelessWidget with HomeHelper {
                       .read<HomeScreenBloc>()
                       .add(DeleteTransaction(entity: data));
                 },
-                backgroundColor: FinFlowTheme.whiteColor,
+                backgroundColor: theme.canvasColor,
                 foregroundColor: FinFlowTheme.greyColor,
                 icon: Icons.delete,
                 label: 'Delete',
@@ -236,7 +262,7 @@ class TransactionListTile extends StatelessWidget with HomeHelper {
           ],
         ),
         child: Container(
-          color: FinFlowTheme.whiteColor,
+          color: theme.canvasColor,
           child: ListTile(
             leading: data.isIncome
                 ? const Icon(

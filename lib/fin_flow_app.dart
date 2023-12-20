@@ -1,3 +1,4 @@
+import 'package:fin_flow/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -29,12 +30,16 @@ class FinFlowApp extends StatelessWidget {
           create: (context) => SplashScreenCubit(),
         ),
       ],
-      child: MaterialApp(
-        themeMode: ThemeMode.dark,
-        theme: FinFlowTheme.light,
-        darkTheme: FinFlowTheme.dark,
-        home: SplashScreen(),
-      ),
+      child: ValueListenableBuilder(
+          valueListenable: isDark,
+          builder: (context, isDark, _) {
+            return MaterialApp(
+              themeMode: isDark ? ThemeMode.dark : ThemeMode.light,
+              theme: FinFlowTheme.light,
+              darkTheme: FinFlowTheme.dark,
+              home: SplashScreen(),
+            );
+          }),
     );
   }
 }

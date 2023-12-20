@@ -23,6 +23,7 @@ class TopSection extends StatelessWidget with HomeHelper {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    ThemeData theme = Theme.of(context);
     List<String> selectionTitle = ["Today", "This month", "Custom"];
     return Padding(
       padding: const EdgeInsets.all(15.0),
@@ -35,7 +36,8 @@ class TopSection extends StatelessWidget with HomeHelper {
                 Text(greeting()),
                 Text(
                   FirebaseAuth.instance.currentUser?.displayName ?? "User",
-                  style: txt16BlackB,
+                  style: theme.textTheme.bodyLarge
+                      ?.copyWith(fontWeight: FontWeight.w800),
                 ),
                 Space.y(15),
                 Row(
@@ -58,7 +60,7 @@ class TopSection extends StatelessWidget with HomeHelper {
                     child: Container(
                       margin: const EdgeInsets.all(7),
                       decoration: BoxDecoration(
-                          color: FinFlowTheme.whiteColor,
+                          // color: theme.canvasColor,
                           borderRadius: BorderRadius.circular(90),
                           border: Border.all(
                               color: (index == value)
@@ -102,6 +104,7 @@ class SummeryContainer extends StatelessWidget with HomeHelper {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    ThemeData theme = Theme.of(context);
     double totolValue = total(transactions);
     return Container(
       padding: const EdgeInsets.all(
@@ -117,7 +120,7 @@ class SummeryContainer extends StatelessWidget with HomeHelper {
             ),
             opacity: 0.1,
             fit: BoxFit.cover),
-        color: FinFlowTheme.whiteColor,
+        color: theme.canvasColor,
         borderRadius: BorderRadius.circular(
           20,
         ),

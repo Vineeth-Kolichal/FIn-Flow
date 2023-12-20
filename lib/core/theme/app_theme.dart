@@ -7,6 +7,7 @@ class FinFlowTheme {
     scaffoldBackgroundColor: scaffoldBgLight,
     useMaterial3: true,
     fontFamily: GoogleFonts.poppins().fontFamily,
+    canvasColor: whiteColor,
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: blackColor,
@@ -16,12 +17,16 @@ class FinFlowTheme {
       ),
     ),
     textTheme: lightTextTheme,
+    buttonTheme: const ButtonThemeData(
+      buttonColor: blackColor,
+    ),
   );
   static ThemeData dark = ThemeData(
     brightness: Brightness.dark,
     scaffoldBackgroundColor: scaffoldBgDark,
     useMaterial3: true,
     fontFamily: GoogleFonts.poppins().fontFamily,
+    canvasColor: blackColor,
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
           backgroundColor: whiteColor,
@@ -30,6 +35,7 @@ class FinFlowTheme {
           )),
     ),
     textTheme: darkTextTheme,
+    buttonTheme: const ButtonThemeData(buttonColor: whiteColor),
   );
 
   //TextTheme
@@ -44,7 +50,7 @@ class FinFlowTheme {
     labelMedium: TextStyle(
       fontSize: 14,
       fontWeight: FontWeight.bold,
-      color: blackColor,
+      color: whiteColor,
     ),
   );
 //Colors
