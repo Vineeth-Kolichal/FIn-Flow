@@ -1,6 +1,5 @@
 import 'package:fin_flow/common/widgets/export_common_widgets.dart';
 import 'package:fin_flow/core/theme/app_theme.dart';
-import 'package:fin_flow/core/theme/text_styles.dart';
 import 'package:fin_flow/features/authentication/presentation/authentication_bloc/authentication_bloc.dart';
 import 'package:fin_flow/features/home/presentation/pages/home_screen.dart';
 import 'package:flutter/material.dart';
