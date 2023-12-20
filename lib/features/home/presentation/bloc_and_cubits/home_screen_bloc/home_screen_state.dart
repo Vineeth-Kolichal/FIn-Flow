@@ -8,6 +8,10 @@ class HomeScreenState with _$HomeScreenState {
     required bool isLoading,
     required String? dSuccess,
     required String? dErr,
+    required String? pdfMsg,
+    required bool? isPdfError,
+    required DateTime? fromDate,
+    required DateTime? todDate,
   }) = _Initial;
   factory HomeScreenState.initial() => const HomeScreenState(
         transactionList: [],
@@ -15,5 +19,9 @@ class HomeScreenState with _$HomeScreenState {
         isLoading: false,
         dErr: null,
         dSuccess: null,
+        pdfMsg: null,
+        isPdfError: null,
+        fromDate: null,
+        todDate: null,
       );
 }

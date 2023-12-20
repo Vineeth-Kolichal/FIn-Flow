@@ -7,6 +7,8 @@ class HomeScreenEvent with _$HomeScreenEvent {
     required DateTime toDate,
   }) = GetTransactions;
 
-  const factory HomeScreenEvent.deleteTransaction({required TransactionEntity entity}) =
-      DeleteTransaction;
+  const factory HomeScreenEvent.deleteTransaction(
+      {required TransactionEntity entity}) = DeleteTransaction;
+  const factory HomeScreenEvent.generateReport(
+      {required List<TransactionEntity> transactions}) = GenerateReport;
 }

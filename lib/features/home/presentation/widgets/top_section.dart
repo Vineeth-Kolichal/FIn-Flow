@@ -148,7 +148,11 @@ class SummeryContainer extends StatelessWidget with HomeHelper {
                     );
                   }),
               InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    context
+                        .read<HomeScreenBloc>()
+                        .add(GenerateReport(transactions: transactions));
+                  },
                   child: const Icon(
                     FinFlowIcons.file_pdf,
                     size: 17,

@@ -21,18 +21,22 @@ mixin _$HomeScreenEvent {
     required TResult Function(DateTime fromDate, DateTime toDate)
         getTransactions,
     required TResult Function(TransactionEntity entity) deleteTransaction,
+    required TResult Function(List<TransactionEntity> transactions)
+        generateReport,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(DateTime fromDate, DateTime toDate)? getTransactions,
     TResult? Function(TransactionEntity entity)? deleteTransaction,
+    TResult? Function(List<TransactionEntity> transactions)? generateReport,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(DateTime fromDate, DateTime toDate)? getTransactions,
     TResult Function(TransactionEntity entity)? deleteTransaction,
+    TResult Function(List<TransactionEntity> transactions)? generateReport,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -40,18 +44,21 @@ mixin _$HomeScreenEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(GetTransactions value) getTransactions,
     required TResult Function(DeleteTransaction value) deleteTransaction,
+    required TResult Function(GenerateReport value) generateReport,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(GetTransactions value)? getTransactions,
     TResult? Function(DeleteTransaction value)? deleteTransaction,
+    TResult? Function(GenerateReport value)? generateReport,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(GetTransactions value)? getTransactions,
     TResult Function(DeleteTransaction value)? deleteTransaction,
+    TResult Function(GenerateReport value)? generateReport,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -152,6 +159,8 @@ class _$GetTransactionsImpl implements GetTransactions {
     required TResult Function(DateTime fromDate, DateTime toDate)
         getTransactions,
     required TResult Function(TransactionEntity entity) deleteTransaction,
+    required TResult Function(List<TransactionEntity> transactions)
+        generateReport,
   }) {
     return getTransactions(fromDate, toDate);
   }
@@ -161,6 +170,7 @@ class _$GetTransactionsImpl implements GetTransactions {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(DateTime fromDate, DateTime toDate)? getTransactions,
     TResult? Function(TransactionEntity entity)? deleteTransaction,
+    TResult? Function(List<TransactionEntity> transactions)? generateReport,
   }) {
     return getTransactions?.call(fromDate, toDate);
   }
@@ -170,6 +180,7 @@ class _$GetTransactionsImpl implements GetTransactions {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(DateTime fromDate, DateTime toDate)? getTransactions,
     TResult Function(TransactionEntity entity)? deleteTransaction,
+    TResult Function(List<TransactionEntity> transactions)? generateReport,
     required TResult orElse(),
   }) {
     if (getTransactions != null) {
@@ -183,6 +194,7 @@ class _$GetTransactionsImpl implements GetTransactions {
   TResult map<TResult extends Object?>({
     required TResult Function(GetTransactions value) getTransactions,
     required TResult Function(DeleteTransaction value) deleteTransaction,
+    required TResult Function(GenerateReport value) generateReport,
   }) {
     return getTransactions(this);
   }
@@ -192,6 +204,7 @@ class _$GetTransactionsImpl implements GetTransactions {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(GetTransactions value)? getTransactions,
     TResult? Function(DeleteTransaction value)? deleteTransaction,
+    TResult? Function(GenerateReport value)? generateReport,
   }) {
     return getTransactions?.call(this);
   }
@@ -201,6 +214,7 @@ class _$GetTransactionsImpl implements GetTransactions {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(GetTransactions value)? getTransactions,
     TResult Function(DeleteTransaction value)? deleteTransaction,
+    TResult Function(GenerateReport value)? generateReport,
     required TResult orElse(),
   }) {
     if (getTransactions != null) {
@@ -290,6 +304,8 @@ class _$DeleteTransactionImpl implements DeleteTransaction {
     required TResult Function(DateTime fromDate, DateTime toDate)
         getTransactions,
     required TResult Function(TransactionEntity entity) deleteTransaction,
+    required TResult Function(List<TransactionEntity> transactions)
+        generateReport,
   }) {
     return deleteTransaction(entity);
   }
@@ -299,6 +315,7 @@ class _$DeleteTransactionImpl implements DeleteTransaction {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(DateTime fromDate, DateTime toDate)? getTransactions,
     TResult? Function(TransactionEntity entity)? deleteTransaction,
+    TResult? Function(List<TransactionEntity> transactions)? generateReport,
   }) {
     return deleteTransaction?.call(entity);
   }
@@ -308,6 +325,7 @@ class _$DeleteTransactionImpl implements DeleteTransaction {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(DateTime fromDate, DateTime toDate)? getTransactions,
     TResult Function(TransactionEntity entity)? deleteTransaction,
+    TResult Function(List<TransactionEntity> transactions)? generateReport,
     required TResult orElse(),
   }) {
     if (deleteTransaction != null) {
@@ -321,6 +339,7 @@ class _$DeleteTransactionImpl implements DeleteTransaction {
   TResult map<TResult extends Object?>({
     required TResult Function(GetTransactions value) getTransactions,
     required TResult Function(DeleteTransaction value) deleteTransaction,
+    required TResult Function(GenerateReport value) generateReport,
   }) {
     return deleteTransaction(this);
   }
@@ -330,6 +349,7 @@ class _$DeleteTransactionImpl implements DeleteTransaction {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(GetTransactions value)? getTransactions,
     TResult? Function(DeleteTransaction value)? deleteTransaction,
+    TResult? Function(GenerateReport value)? generateReport,
   }) {
     return deleteTransaction?.call(this);
   }
@@ -339,6 +359,7 @@ class _$DeleteTransactionImpl implements DeleteTransaction {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(GetTransactions value)? getTransactions,
     TResult Function(DeleteTransaction value)? deleteTransaction,
+    TResult Function(GenerateReport value)? generateReport,
     required TResult orElse(),
   }) {
     if (deleteTransaction != null) {
@@ -359,6 +380,159 @@ abstract class DeleteTransaction implements HomeScreenEvent {
 }
 
 /// @nodoc
+abstract class _$$GenerateReportImplCopyWith<$Res> {
+  factory _$$GenerateReportImplCopyWith(_$GenerateReportImpl value,
+          $Res Function(_$GenerateReportImpl) then) =
+      __$$GenerateReportImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<TransactionEntity> transactions});
+}
+
+/// @nodoc
+class __$$GenerateReportImplCopyWithImpl<$Res>
+    extends _$HomeScreenEventCopyWithImpl<$Res, _$GenerateReportImpl>
+    implements _$$GenerateReportImplCopyWith<$Res> {
+  __$$GenerateReportImplCopyWithImpl(
+      _$GenerateReportImpl _value, $Res Function(_$GenerateReportImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? transactions = null,
+  }) {
+    return _then(_$GenerateReportImpl(
+      transactions: null == transactions
+          ? _value._transactions
+          : transactions // ignore: cast_nullable_to_non_nullable
+              as List<TransactionEntity>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$GenerateReportImpl implements GenerateReport {
+  const _$GenerateReportImpl(
+      {required final List<TransactionEntity> transactions})
+      : _transactions = transactions;
+
+  final List<TransactionEntity> _transactions;
+  @override
+  List<TransactionEntity> get transactions {
+    if (_transactions is EqualUnmodifiableListView) return _transactions;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_transactions);
+  }
+
+  @override
+  String toString() {
+    return 'HomeScreenEvent.generateReport(transactions: $transactions)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GenerateReportImpl &&
+            const DeepCollectionEquality()
+                .equals(other._transactions, _transactions));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_transactions));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GenerateReportImplCopyWith<_$GenerateReportImpl> get copyWith =>
+      __$$GenerateReportImplCopyWithImpl<_$GenerateReportImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(DateTime fromDate, DateTime toDate)
+        getTransactions,
+    required TResult Function(TransactionEntity entity) deleteTransaction,
+    required TResult Function(List<TransactionEntity> transactions)
+        generateReport,
+  }) {
+    return generateReport(transactions);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(DateTime fromDate, DateTime toDate)? getTransactions,
+    TResult? Function(TransactionEntity entity)? deleteTransaction,
+    TResult? Function(List<TransactionEntity> transactions)? generateReport,
+  }) {
+    return generateReport?.call(transactions);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(DateTime fromDate, DateTime toDate)? getTransactions,
+    TResult Function(TransactionEntity entity)? deleteTransaction,
+    TResult Function(List<TransactionEntity> transactions)? generateReport,
+    required TResult orElse(),
+  }) {
+    if (generateReport != null) {
+      return generateReport(transactions);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(GetTransactions value) getTransactions,
+    required TResult Function(DeleteTransaction value) deleteTransaction,
+    required TResult Function(GenerateReport value) generateReport,
+  }) {
+    return generateReport(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(GetTransactions value)? getTransactions,
+    TResult? Function(DeleteTransaction value)? deleteTransaction,
+    TResult? Function(GenerateReport value)? generateReport,
+  }) {
+    return generateReport?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(GetTransactions value)? getTransactions,
+    TResult Function(DeleteTransaction value)? deleteTransaction,
+    TResult Function(GenerateReport value)? generateReport,
+    required TResult orElse(),
+  }) {
+    if (generateReport != null) {
+      return generateReport(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class GenerateReport implements HomeScreenEvent {
+  const factory GenerateReport(
+          {required final List<TransactionEntity> transactions}) =
+      _$GenerateReportImpl;
+
+  List<TransactionEntity> get transactions;
+  @JsonKey(ignore: true)
+  _$$GenerateReportImplCopyWith<_$GenerateReportImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$HomeScreenState {
   List<TransactionEntity> get transactionList =>
       throw _privateConstructorUsedError;
@@ -366,6 +540,10 @@ mixin _$HomeScreenState {
   bool get isLoading => throw _privateConstructorUsedError;
   String? get dSuccess => throw _privateConstructorUsedError;
   String? get dErr => throw _privateConstructorUsedError;
+  String? get pdfMsg => throw _privateConstructorUsedError;
+  bool? get isPdfError => throw _privateConstructorUsedError;
+  DateTime? get fromDate => throw _privateConstructorUsedError;
+  DateTime? get todDate => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomeScreenStateCopyWith<HomeScreenState> get copyWith =>
@@ -383,7 +561,11 @@ abstract class $HomeScreenStateCopyWith<$Res> {
       String? error,
       bool isLoading,
       String? dSuccess,
-      String? dErr});
+      String? dErr,
+      String? pdfMsg,
+      bool? isPdfError,
+      DateTime? fromDate,
+      DateTime? todDate});
 }
 
 /// @nodoc
@@ -404,6 +586,10 @@ class _$HomeScreenStateCopyWithImpl<$Res, $Val extends HomeScreenState>
     Object? isLoading = null,
     Object? dSuccess = freezed,
     Object? dErr = freezed,
+    Object? pdfMsg = freezed,
+    Object? isPdfError = freezed,
+    Object? fromDate = freezed,
+    Object? todDate = freezed,
   }) {
     return _then(_value.copyWith(
       transactionList: null == transactionList
@@ -426,6 +612,22 @@ class _$HomeScreenStateCopyWithImpl<$Res, $Val extends HomeScreenState>
           ? _value.dErr
           : dErr // ignore: cast_nullable_to_non_nullable
               as String?,
+      pdfMsg: freezed == pdfMsg
+          ? _value.pdfMsg
+          : pdfMsg // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isPdfError: freezed == isPdfError
+          ? _value.isPdfError
+          : isPdfError // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      fromDate: freezed == fromDate
+          ? _value.fromDate
+          : fromDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      todDate: freezed == todDate
+          ? _value.todDate
+          : todDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ) as $Val);
   }
 }
@@ -443,7 +645,11 @@ abstract class _$$InitialImplCopyWith<$Res>
       String? error,
       bool isLoading,
       String? dSuccess,
-      String? dErr});
+      String? dErr,
+      String? pdfMsg,
+      bool? isPdfError,
+      DateTime? fromDate,
+      DateTime? todDate});
 }
 
 /// @nodoc
@@ -462,6 +668,10 @@ class __$$InitialImplCopyWithImpl<$Res>
     Object? isLoading = null,
     Object? dSuccess = freezed,
     Object? dErr = freezed,
+    Object? pdfMsg = freezed,
+    Object? isPdfError = freezed,
+    Object? fromDate = freezed,
+    Object? todDate = freezed,
   }) {
     return _then(_$InitialImpl(
       transactionList: null == transactionList
@@ -484,6 +694,22 @@ class __$$InitialImplCopyWithImpl<$Res>
           ? _value.dErr
           : dErr // ignore: cast_nullable_to_non_nullable
               as String?,
+      pdfMsg: freezed == pdfMsg
+          ? _value.pdfMsg
+          : pdfMsg // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isPdfError: freezed == isPdfError
+          ? _value.isPdfError
+          : isPdfError // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      fromDate: freezed == fromDate
+          ? _value.fromDate
+          : fromDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      todDate: freezed == todDate
+          ? _value.todDate
+          : todDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -496,7 +722,11 @@ class _$InitialImpl implements _Initial {
       required this.error,
       required this.isLoading,
       required this.dSuccess,
-      required this.dErr})
+      required this.dErr,
+      required this.pdfMsg,
+      required this.isPdfError,
+      required this.fromDate,
+      required this.todDate})
       : _transactionList = transactionList;
 
   final List<TransactionEntity> _transactionList;
@@ -515,10 +745,18 @@ class _$InitialImpl implements _Initial {
   final String? dSuccess;
   @override
   final String? dErr;
+  @override
+  final String? pdfMsg;
+  @override
+  final bool? isPdfError;
+  @override
+  final DateTime? fromDate;
+  @override
+  final DateTime? todDate;
 
   @override
   String toString() {
-    return 'HomeScreenState(transactionList: $transactionList, error: $error, isLoading: $isLoading, dSuccess: $dSuccess, dErr: $dErr)';
+    return 'HomeScreenState(transactionList: $transactionList, error: $error, isLoading: $isLoading, dSuccess: $dSuccess, dErr: $dErr, pdfMsg: $pdfMsg, isPdfError: $isPdfError, fromDate: $fromDate, todDate: $todDate)';
   }
 
   @override
@@ -533,7 +771,13 @@ class _$InitialImpl implements _Initial {
                 other.isLoading == isLoading) &&
             (identical(other.dSuccess, dSuccess) ||
                 other.dSuccess == dSuccess) &&
-            (identical(other.dErr, dErr) || other.dErr == dErr));
+            (identical(other.dErr, dErr) || other.dErr == dErr) &&
+            (identical(other.pdfMsg, pdfMsg) || other.pdfMsg == pdfMsg) &&
+            (identical(other.isPdfError, isPdfError) ||
+                other.isPdfError == isPdfError) &&
+            (identical(other.fromDate, fromDate) ||
+                other.fromDate == fromDate) &&
+            (identical(other.todDate, todDate) || other.todDate == todDate));
   }
 
   @override
@@ -543,7 +787,11 @@ class _$InitialImpl implements _Initial {
       error,
       isLoading,
       dSuccess,
-      dErr);
+      dErr,
+      pdfMsg,
+      isPdfError,
+      fromDate,
+      todDate);
 
   @JsonKey(ignore: true)
   @override
@@ -558,7 +806,11 @@ abstract class _Initial implements HomeScreenState {
       required final String? error,
       required final bool isLoading,
       required final String? dSuccess,
-      required final String? dErr}) = _$InitialImpl;
+      required final String? dErr,
+      required final String? pdfMsg,
+      required final bool? isPdfError,
+      required final DateTime? fromDate,
+      required final DateTime? todDate}) = _$InitialImpl;
 
   @override
   List<TransactionEntity> get transactionList;
@@ -570,6 +822,14 @@ abstract class _Initial implements HomeScreenState {
   String? get dSuccess;
   @override
   String? get dErr;
+  @override
+  String? get pdfMsg;
+  @override
+  bool? get isPdfError;
+  @override
+  DateTime? get fromDate;
+  @override
+  DateTime? get todDate;
   @override
   @JsonKey(ignore: true)
   _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>

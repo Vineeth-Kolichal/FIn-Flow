@@ -1,5 +1,6 @@
 import 'package:fin_flow/features/home/domain/entities/transaction_entity.dart';
 import 'package:fin_flow/features/home/domain/usecases/delete_transactions_usecase.dart';
+import 'package:fin_flow/features/home/domain/usecases/generate_report_usecase.dart';
 import 'package:fin_flow/features/home/domain/usecases/get_transactions_usecase.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -13,18 +14,25 @@ part 'home_screen_bloc.freezed.dart';
 class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
   DeleteTransactionUsecase deleteTransactionUsecase;
   GetTransactionsUsecase getTransactionsUsecase;
-  HomeScreenBloc(this.getTransactionsUsecase, this.deleteTransactionUsecase)
-      : super(HomeScreenState.initial()) {
+  GenerateReportUsecase generateReportUsecase;
+  HomeScreenBloc(
+    this.getTransactionsUsecase,
+    this.deleteTransactionUsecase,
+    this.generateReportUsecase,
+  ) : super(HomeScreenState.initial()) {
     on<GetTransactions>((event, emit) async {
       final resp = await getTransactionsUsecase(
           DateParams(fromDate: event.fromDate, toDate: event.toDate));
       final newState = resp.fold((fail) {
         return state.copyWith(
-            isLoading: false,
-            error: fail.error,
-            transactionList: [],
-            dErr: null,
-            dSuccess: null);
+          isLoading: false,
+          error: fail.error,
+          transactionList: [],
+          dErr: null,
+          dSuccess: null,
+          fromDate: event.fromDate,
+          todDate: event.toDate,
+        );
       }, (data) {
         return state.copyWith(
           isLoading: false,
@@ -32,6 +40,8 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
           transactionList: data,
           dErr: null,
           dSuccess: null,
+          fromDate: event.fromDate,
+          todDate: event.toDate,
         );
       });
       emit(newState);
@@ -61,6 +71,13 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
         );
       });
       emit(newState);
+    });
+    on<GenerateReport>((event, emit) async {
+      await generateReportUsecase(PdfParam(
+        transactions: event.transactions,
+        fromDate: state.fromDate!,
+        todate: state.todDate!,
+      ));
     });
   }
 }

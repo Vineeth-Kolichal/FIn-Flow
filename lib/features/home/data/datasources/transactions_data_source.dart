@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fin_flow/features/home/data/datasources/pdf_api.dart';
 import 'package:fin_flow/features/home/data/models/transaction_model.dart';
 import 'package:fin_flow/features/home/domain/usecases/add_category_usecase.dart';
 import 'package:fin_flow/features/home/domain/usecases/delete_transactions_usecase.dart';
+import 'package:fin_flow/features/home/domain/usecases/generate_report_usecase.dart';
 import 'package:fin_flow/features/home/domain/usecases/get_categories_usecase.dart';
 import 'package:fin_flow/features/home/domain/usecases/get_transactions_usecase.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -15,6 +17,7 @@ abstract class TransactionDataSource {
   Future<List<TransactionModel>> getTransactions(DateParams params);
   Future<String> addCategory(AddCategoryParam param);
   Future<String> deleteTransaction(DeleteParam param);
+  Future<String> generatePdf(PdfParam param);
 }
 
 @LazySingleton(as: TransactionDataSource)
@@ -99,6 +102,17 @@ class TransactionsDataSourceImpl implements TransactionDataSource {
       return "Transaction deleted";
     } on FirebaseException catch (e) {
       throw DataException('${e.message}');
+    }
+  }
+
+  @override
+  Future<String> generatePdf(PdfParam param) async {
+    try {
+      final pdf = await PdfApi.generate(param);
+      await PdfApi.openFile(pdf);
+      return "Transaction report saved in downloads";
+    } catch (e) {
+      rethrow;
     }
   }
 }
