@@ -24,7 +24,9 @@ class LoginScreen extends StatelessWidget {
             child: Hero(
               tag: 'logo',
               child: Image.asset(
-                'assets/images/fin_flow_logo.png',
+                theme.brightness == Brightness.light
+                    ? 'assets/images/fin_flow_logo.png'
+                    : 'assets/images/fin_flow_logo_inverted.png',
                 height: 60,
               ),
             ),
@@ -79,9 +81,7 @@ class LoginScreen extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Image.asset(
-                    theme.brightness == Brightness.light
-                        ? 'assets/images/fin_flow_logo.png'
-                        : 'assets/images/fin_flow_logo_inverted.png',
+                    'assets/images/google.png',
                     height: 20,
                   ),
                   Space.x(10),

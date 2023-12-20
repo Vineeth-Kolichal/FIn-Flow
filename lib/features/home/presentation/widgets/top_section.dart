@@ -22,7 +22,7 @@ class TopSection extends StatelessWidget with HomeHelper {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    // Size size = MediaQuery.of(context).size;
     ThemeData theme = Theme.of(context);
     List<String> selectionTitle = ["Today", "This month", "Custom"];
     return Padding(
