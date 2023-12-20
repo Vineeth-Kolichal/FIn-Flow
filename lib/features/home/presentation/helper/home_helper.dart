@@ -110,8 +110,8 @@ mixin HomeHelper {
                               toastLength: Toast.LENGTH_SHORT,
                               gravity: ToastGravity.BOTTOM,
                               timeInSecForIosWeb: 1,
-                              backgroundColor: AppTheme.blackColor,
-                              textColor: AppTheme.whiteColor,
+                              backgroundColor: FinFlowTheme.blackColor,
+                              textColor: FinFlowTheme.whiteColor,
                               fontSize: 12.0,
                             );
                           }
@@ -121,8 +121,8 @@ mixin HomeHelper {
                               toastLength: Toast.LENGTH_SHORT,
                               gravity: ToastGravity.BOTTOM,
                               timeInSecForIosWeb: 1,
-                              backgroundColor: AppTheme.blackColor,
-                              textColor: AppTheme.whiteColor,
+                              backgroundColor: FinFlowTheme.blackColor,
+                              textColor: FinFlowTheme.whiteColor,
                               fontSize: 12.0,
                             );
                           }
@@ -156,7 +156,7 @@ mixin HomeHelper {
                         icon: const Icon(
                           Icons.add,
                           size: 12,
-                          color: AppTheme.blueColor,
+                          color: FinFlowTheme.blueColor,
                         ),
                         label: const Text(
                           'Add category',
@@ -188,7 +188,7 @@ mixin HomeHelper {
                     width: double.infinity,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: AppTheme.blackColor,
+                        backgroundColor: FinFlowTheme.blackColor,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
@@ -322,7 +322,7 @@ mixin HomeHelper {
                 }
               },
               style: ElevatedButton.styleFrom(
-                  backgroundColor: AppTheme.blackColor),
+                  backgroundColor: FinFlowTheme.blackColor),
               child: const Text(
                 "Add",
                 style: txt14WhiteB,
@@ -438,7 +438,7 @@ mixin HomeHelper {
                       (route) => false);
                 },
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: AppTheme.blackColor),
+                    backgroundColor: FinFlowTheme.blackColor),
                 child: const Text(
                   "Yes",
                   style: txt14WhiteB,

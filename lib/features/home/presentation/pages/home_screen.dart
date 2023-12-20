@@ -157,13 +157,13 @@ class HomeScreen extends StatelessWidget with HomeHelper {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: AppTheme.blackColor,
+        backgroundColor: FinFlowTheme.blackColor,
         onPressed: () {
           addTransactionSheet(context);
         },
         child: const Icon(
           FinFlowIcons.rupee,
-          color: AppTheme.whiteColor,
+          color: FinFlowTheme.whiteColor,
         ),
       ),
     );
@@ -197,8 +197,8 @@ class TransactionListTile extends StatelessWidget with HomeHelper {
                     toastLength: Toast.LENGTH_SHORT,
                     gravity: ToastGravity.BOTTOM,
                     timeInSecForIosWeb: 1,
-                    backgroundColor: AppTheme.blackColor,
-                    textColor: AppTheme.whiteColor,
+                    backgroundColor: FinFlowTheme.blackColor,
+                    textColor: FinFlowTheme.whiteColor,
                     fontSize: 12.0,
                   );
                 }
@@ -208,8 +208,8 @@ class TransactionListTile extends StatelessWidget with HomeHelper {
                     toastLength: Toast.LENGTH_SHORT,
                     gravity: ToastGravity.BOTTOM,
                     timeInSecForIosWeb: 1,
-                    backgroundColor: AppTheme.blackColor,
-                    textColor: AppTheme.whiteColor,
+                    backgroundColor: FinFlowTheme.blackColor,
+                    textColor: FinFlowTheme.whiteColor,
                     fontSize: 12.0,
                   );
                 }
@@ -220,8 +220,8 @@ class TransactionListTile extends StatelessWidget with HomeHelper {
                       .read<HomeScreenBloc>()
                       .add(DeleteTransaction(entity: data));
                 },
-                backgroundColor: AppTheme.whiteColor,
-                foregroundColor: AppTheme.greyColor,
+                backgroundColor: FinFlowTheme.whiteColor,
+                foregroundColor: FinFlowTheme.greyColor,
                 icon: Icons.delete,
                 label: 'Delete',
               ),
@@ -236,16 +236,16 @@ class TransactionListTile extends StatelessWidget with HomeHelper {
           ],
         ),
         child: Container(
-          color: AppTheme.whiteColor,
+          color: FinFlowTheme.whiteColor,
           child: ListTile(
             leading: data.isIncome
                 ? const Icon(
                     FinFlowIcons.arrow_circle_up,
-                    color: AppTheme.greenColor,
+                    color: FinFlowTheme.greenColor,
                   )
                 : const Icon(
                     FinFlowIcons.arrow_circle_down,
-                    color: AppTheme.redColor,
+                    color: FinFlowTheme.redColor,
                   ),
             title: Text('₹${data.amount}'),
             subtitle: RichText(

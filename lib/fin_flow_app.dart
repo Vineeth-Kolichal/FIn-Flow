@@ -30,7 +30,9 @@ class FinFlowApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        theme: AppTheme.theme,
+        themeMode: ThemeMode.dark,
+        theme: FinFlowTheme.light,
+        darkTheme: FinFlowTheme.dark,
         home: SplashScreen(),
       ),
     );

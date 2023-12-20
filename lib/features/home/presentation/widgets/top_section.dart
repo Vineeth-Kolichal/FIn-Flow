@@ -58,12 +58,12 @@ class TopSection extends StatelessWidget with HomeHelper {
                     child: Container(
                       margin: const EdgeInsets.all(7),
                       decoration: BoxDecoration(
-                          color: AppTheme.whiteColor,
+                          color: FinFlowTheme.whiteColor,
                           borderRadius: BorderRadius.circular(90),
                           border: Border.all(
                               color: (index == value)
-                                  ? AppTheme.blueColor
-                                  : AppTheme.greyColor,
+                                  ? FinFlowTheme.blueColor
+                                  : FinFlowTheme.greyColor,
                               width: 0.5)),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
@@ -117,7 +117,7 @@ class SummeryContainer extends StatelessWidget with HomeHelper {
             ),
             opacity: 0.1,
             fit: BoxFit.cover),
-        color: AppTheme.whiteColor,
+        color: FinFlowTheme.whiteColor,
         borderRadius: BorderRadius.circular(
           20,
         ),
@@ -148,7 +148,7 @@ class SummeryContainer extends StatelessWidget with HomeHelper {
                   child: const Icon(
                     FinFlowIcons.file_pdf,
                     size: 17,
-                    color: AppTheme.redColor,
+                    color: FinFlowTheme.redColor,
                   ))
             ],
           ),
@@ -168,7 +168,7 @@ class SummeryContainer extends StatelessWidget with HomeHelper {
               const Icon(
                 size: 17,
                 FinFlowIcons.arrow_circle_up,
-                color: AppTheme.greenColor,
+                color: FinFlowTheme.greenColor,
               ),
               Space.x(5),
               Text(
@@ -185,7 +185,7 @@ class SummeryContainer extends StatelessWidget with HomeHelper {
               const Icon(
                 size: 17,
                 FinFlowIcons.arrow_circle_down,
-                color: AppTheme.redColor,
+                color: FinFlowTheme.redColor,
               ),
               Space.x(5),
               Text(
@@ -237,7 +237,7 @@ class CustomDateRow extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                  color: AppTheme.blackColor,
+                  color: FinFlowTheme.blackColor,
                   borderRadius: BorderRadius.circular(10)),
               child: const Text(
                 "Go",
@@ -286,7 +286,7 @@ class DateSelectionButton extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              border: Border.all(color: AppTheme.greyColor),
+              border: Border.all(color: FinFlowTheme.greyColor),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Row(

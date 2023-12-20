@@ -14,6 +14,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    ThemeData theme = Theme.of(context);
     return Scaffold(
         body: Stack(
       children: [
@@ -35,8 +36,6 @@ class LoginScreen extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.only(bottom: 20),
             child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: AppTheme.blackColor),
               onPressed: () {
                 context.read<AuthenticationBloc>().add(const GoogleSignIn());
                 showDialog(
@@ -61,8 +60,8 @@ class LoginScreen extends StatelessWidget {
                                 toastLength: Toast.LENGTH_SHORT,
                                 gravity: ToastGravity.BOTTOM,
                                 timeInSecForIosWeb: 1,
-                                backgroundColor: AppTheme.blackColor,
-                                textColor: AppTheme.whiteColor,
+                                backgroundColor: FinFlowTheme.blackColor,
+                                textColor: FinFlowTheme.whiteColor,
                                 fontSize: 12.0,
                               );
                               Navigator.of(context).pop();
@@ -71,7 +70,7 @@ class LoginScreen extends StatelessWidget {
                           child: Center(
                             child:
                                 LoadingAnimationWidget.horizontalRotatingDots(
-                                    color: AppTheme.blueColor, size: 70),
+                                    color: FinFlowTheme.blueColor, size: 70),
                           ),
                         ),
                       );
@@ -85,9 +84,10 @@ class LoginScreen extends StatelessWidget {
                     height: 20,
                   ),
                   Space.x(10),
-                  const Text(
+                  Text(
                     "Continue with Google",
-                    style: txt14WhiteB,
+                    style: theme.textTheme.labelMedium,
+                    //style: txt14WhiteB,
                   ),
                 ],
               ),

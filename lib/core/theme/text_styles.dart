@@ -3,50 +3,50 @@ import 'package:flutter/material.dart';
 
 const txt12Blue = TextStyle(
   fontSize: 12,
-  color: AppTheme.blueColor,
+  color: FinFlowTheme.blueColor,
 );
 
 const txt12Grey = TextStyle(
   fontSize: 12,
-  color: AppTheme.greyColor,
+  color: FinFlowTheme.greyColor,
 );
 const txt14Black = TextStyle(
   fontSize: 14,
-  color: AppTheme.blackColor,
+  color: FinFlowTheme.blackColor,
 );
 
 const txt16BlackB = TextStyle(
   fontSize: 16,
-  color: AppTheme.blackColor,
+  color: FinFlowTheme.blackColor,
   fontWeight: FontWeight.bold,
 );
 
 const txt35GreenB = TextStyle(
-  color: AppTheme.greenColor,
+  color: FinFlowTheme.greenColor,
   fontSize: 35,
   fontWeight: FontWeight.bold,
 );
 const txt35RedB = TextStyle(
-  color: AppTheme.redColor,
+  color: FinFlowTheme.redColor,
   fontSize: 35,
   fontWeight: FontWeight.bold,
 );
 const txt16GreenB = TextStyle(
-  color: AppTheme.greenColor,
+  color: FinFlowTheme.greenColor,
   fontSize: 16,
   fontWeight: FontWeight.bold,
 );
 const txt16RedB = TextStyle(
-  color: AppTheme.redColor,
+  color: FinFlowTheme.redColor,
   fontSize: 16,
   fontWeight: FontWeight.bold,
 );
 const txt14WhiteB = TextStyle(
-  color: AppTheme.whiteColor,
+  color: FinFlowTheme.whiteColor,
   fontSize: 14,
   fontWeight: FontWeight.bold,
 );
 const txt12White = TextStyle(
-  color: AppTheme.whiteColor,
+  color: FinFlowTheme.whiteColor,
   fontSize: 12,
 );
