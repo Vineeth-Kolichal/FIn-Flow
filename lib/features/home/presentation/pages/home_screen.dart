@@ -7,6 +7,7 @@ import 'package:fin_flow/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -65,6 +66,17 @@ class HomeScreen extends StatelessWidget with HomeHelper {
                     SharedPreferences shared =
                         await SharedPreferences.getInstance();
                     shared.setBool('theme', isDark.value);
+                  }
+                  if (selected == ProfilePopUpItem.manageCategory) {
+                    Fluttertoast.showToast(
+                      msg: "Manage category feature is not available now",
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.BOTTOM,
+                      timeInSecForIosWeb: 1,
+                      backgroundColor: FinFlowTheme.blackColor,
+                      textColor: FinFlowTheme.whiteColor,
+                      fontSize: 12.0,
+                    );
                   }
                 },
                 child: CircleAvatar(
