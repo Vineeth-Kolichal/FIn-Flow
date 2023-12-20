@@ -80,7 +80,9 @@ class LoginScreen extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Image.asset(
-                    'assets/images/google.png',
+                    theme.brightness == Brightness.light
+                        ? 'assets/images/fin_flow_logo.png'
+                        : 'assets/images/fin_flow_logo_inverted.png',
                     height: 20,
                   ),
                   Space.x(10),

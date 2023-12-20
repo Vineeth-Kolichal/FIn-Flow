@@ -55,7 +55,7 @@ class FinFlowTheme {
   );
 //Colors
   static const Color scaffoldBgLight = Color.fromARGB(255, 247, 246, 246);
-  static const Color scaffoldBgDark = Color.fromARGB(255, 34, 34, 34);
+  static const Color scaffoldBgDark = Color.fromARGB(255, 19, 18, 18);
   static const Color whiteColor = Colors.white;
   static const Color blackColor = Colors.black;
   static const Color greyColor = Colors.grey;

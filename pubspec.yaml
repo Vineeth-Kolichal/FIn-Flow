@@ -49,6 +49,7 @@ dependencies:
   fluttertoast: ^8.2.4
   intl: ^0.19.0
   flutter_slidable: ^3.0.1
+  shared_preferences: ^2.2.2
 
 dev_dependencies:
   flutter_test:
@@ -88,6 +89,7 @@ flutter:
     - assets/images/google.png
     - assets/images/fin_flow_logo.png
     - assets/images/fin_flow_icon.png
+    - assets/images/fin_flow_logo_inverted.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../widgets/top_section.dart';
 
@@ -46,7 +47,9 @@ class HomeScreen extends StatelessWidget with HomeHelper {
             Hero(
                 tag: 'logo',
                 child: Image.asset(
-                  'assets/images/fin_flow_logo.png',
+                  theme.brightness == Brightness.light
+                      ? 'assets/images/fin_flow_logo.png'
+                      : 'assets/images/fin_flow_logo_inverted.png',
                   height: 30,
                 )),
           ],
@@ -55,12 +58,15 @@ class HomeScreen extends StatelessWidget with HomeHelper {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: PopupMenuButton<ProfilePopUpItem>(
-                onSelected: (selected) {
+                onSelected: (selected) async {
                   if (selected == ProfilePopUpItem.logout) {
                     logoutDialoge(context);
                   }
                   if (selected == ProfilePopUpItem.changeTheme) {
                     isDark.value = !isDark.value;
+                    SharedPreferences shared =
+                        await SharedPreferences.getInstance();
+                    shared.setBool('theme', isDark.value);
                   }
                 },
                 child: CircleAvatar(
@@ -113,7 +119,6 @@ class HomeScreen extends StatelessWidget with HomeHelper {
       ),
       body: BlocBuilder<HomeScreenBloc, HomeScreenState>(
         builder: (context, state) {
-          print("${state.error}");
           if (state.isLoading) {
             return const Center(
               child: CircularProgressIndicator(
@@ -182,13 +187,15 @@ class HomeScreen extends StatelessWidget with HomeHelper {
       floatingActionButton: FloatingActionButton(
         backgroundColor: theme.brightness == Brightness.light
             ? FinFlowTheme.blackColor
-            : null,
+            : FinFlowTheme.whiteColor,
         onPressed: () {
           addTransactionSheet(context);
         },
-        child: const Icon(
+        child: Icon(
           FinFlowIcons.rupee,
-          color: FinFlowTheme.whiteColor,
+          color: theme.brightness != Brightness.light
+              ? FinFlowTheme.blackColor
+              : FinFlowTheme.whiteColor,
         ),
       ),
     );
