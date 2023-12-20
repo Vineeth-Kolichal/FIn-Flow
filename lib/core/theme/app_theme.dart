@@ -16,7 +16,7 @@ class FinFlowTheme {
         ),
       ),
     ),
-    textTheme: lightTextTheme,
+    textTheme: getTextTheme(false),
     buttonTheme: const ButtonThemeData(
       buttonColor: blackColor,
     ),
@@ -34,25 +34,22 @@ class FinFlowTheme {
             color: blackColor,
           )),
     ),
-    textTheme: darkTextTheme,
+    textTheme: getTextTheme(true),
     buttonTheme: const ButtonThemeData(buttonColor: whiteColor),
   );
 
   //TextTheme
-  static TextTheme darkTextTheme = const TextTheme(
-    labelMedium: TextStyle(
-      fontSize: 14,
-      fontWeight: FontWeight.bold,
-      color: blackColor,
-    ),
-  );
-  static TextTheme lightTextTheme = const TextTheme(
-    labelMedium: TextStyle(
-      fontSize: 14,
-      fontWeight: FontWeight.bold,
-      color: whiteColor,
-    ),
-  );
+
+  static TextTheme getTextTheme(bool isDark) {
+    return TextTheme(
+      labelMedium: TextStyle(
+        fontSize: 14,
+        fontWeight: FontWeight.bold,
+        color: isDark ? blackColor : whiteColor,
+      ),
+    );
+  }
+
 //Colors
   static const Color scaffoldBgLight = Color.fromARGB(255, 247, 246, 246);
   static const Color scaffoldBgDark = Color.fromARGB(255, 19, 18, 18);

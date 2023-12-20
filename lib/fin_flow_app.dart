@@ -37,7 +37,7 @@ class FinFlowApp extends StatelessWidget {
               themeMode: isDark ? ThemeMode.dark : ThemeMode.light,
               theme: FinFlowTheme.light,
               darkTheme: FinFlowTheme.dark,
-              home: SplashScreen(),
+              home: const SplashScreen(),
             );
           }),
     );
