@@ -1,17 +1,16 @@
 import 'package:fin_flow/core/theme/app_theme.dart';
 import 'package:fin_flow/core/theme/fin_flow_icons_icons.dart';
-import 'package:fin_flow/core/theme/text_styles.dart';
-import 'package:fin_flow/features/home/domain/entities/transaction_entity.dart';
 import 'package:fin_flow/features/home/presentation/bloc_and_cubits/home_screen_bloc/home_screen_bloc.dart';
 import 'package:fin_flow/features/home/presentation/helper/home_helper.dart';
+import 'package:fin_flow/features/home/presentation/widgets/transaction_list_tile.dart';
 import 'package:fin_flow/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../../common/widgets/space.dart';
 import '../widgets/top_section.dart';
 
 enum ProfilePopUpItem { manageCategory, changeTheme, logout }
@@ -124,38 +123,39 @@ class HomeScreen extends StatelessWidget with HomeHelper {
                 strokeWidth: 2,
               ),
             );
-          }
-          //  else if (state.error != null) {
-          //   return Center(
-          //     child: Container(
-          //       decoration: BoxDecoration(
-          //           borderRadius: BorderRadius.circular(20),
-          //           color: AppTheme.whiteColor),
-          //       width: size.width * 0.8,
-          //       height: size.width * 0.5,
-          //       child: Center(
-          //         child: Column(
-          //           children: [
-          //             Image.asset(
-          //               'assets/images/error.png',
-          //               height: 70,
-          //             ),
-          //             const Text(
-          //               'Error',
-          //               style: txt18RedB,
-          //             ),
-          //             Space.y(5),
-          //             Text(
-          //               "${state.error}",
-          //               textAlign: TextAlign.center,
-          //             ),
-          //           ],
-          //         ),
-          //       ),
-          //     ),
-          //   );
-          // }
-          else {
+          } else if (state.error != null) {
+            return Center(
+              child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: theme.canvasColor),
+                width: size.width * 0.8,
+                height: size.width * 0.5,
+                child: Center(
+                  child: Column(
+                    children: [
+                      Image.asset(
+                        'assets/images/error.png',
+                        height: 70,
+                      ),
+                      Text(
+                        'Error',
+                        style: theme.textTheme.labelLarge?.copyWith(
+                            color: FinFlowTheme.redColor,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      Space.y(5),
+                      Text(
+                        "${state.error}",
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            );
+          } else {
             final dataList = state.transactionList;
 
             return CustomScrollView(slivers: [
@@ -195,100 +195,6 @@ class HomeScreen extends StatelessWidget with HomeHelper {
           color: theme.brightness != Brightness.light
               ? FinFlowTheme.blackColor
               : FinFlowTheme.whiteColor,
-        ),
-      ),
-    );
-  }
-}
-
-class TransactionListTile extends StatelessWidget with HomeHelper {
-  const TransactionListTile({
-    super.key,
-    required this.data,
-  });
-
-  final TransactionEntity data;
-
-  @override
-  Widget build(BuildContext context) {
-    ThemeData theme = Theme.of(context);
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        vertical: 5,
-      ),
-      child: Slidable(
-        key: const ValueKey(0),
-        startActionPane: ActionPane(
-          motion: const ScrollMotion(),
-          children: [
-            BlocListener<HomeScreenBloc, HomeScreenState>(
-              listener: (context, state) {
-                if (state.dErr != null) {
-                  Fluttertoast.showToast(
-                    msg: "${state.dErr}",
-                    toastLength: Toast.LENGTH_SHORT,
-                    gravity: ToastGravity.BOTTOM,
-                    timeInSecForIosWeb: 1,
-                    backgroundColor: FinFlowTheme.blackColor,
-                    textColor: FinFlowTheme.whiteColor,
-                    fontSize: 12.0,
-                  );
-                }
-                if (state.dSuccess != null) {
-                  Fluttertoast.showToast(
-                    msg: "${state.dSuccess}",
-                    toastLength: Toast.LENGTH_SHORT,
-                    gravity: ToastGravity.BOTTOM,
-                    timeInSecForIosWeb: 1,
-                    backgroundColor: FinFlowTheme.blackColor,
-                    textColor: FinFlowTheme.whiteColor,
-                    fontSize: 12.0,
-                  );
-                }
-              },
-              child: SlidableAction(
-                onPressed: (_) {
-                  context
-                      .read<HomeScreenBloc>()
-                      .add(DeleteTransaction(entity: data));
-                },
-                backgroundColor: theme.canvasColor,
-                foregroundColor: FinFlowTheme.greyColor,
-                icon: Icons.delete,
-                label: 'Delete',
-              ),
-            ),
-            // SlidableAction(
-            //   onPressed: (_) {},
-            //   backgroundColor: AppTheme.whiteColor,
-            //   foregroundColor: AppTheme.greyColor,
-            //   icon: Icons.edit,
-            //   label: 'Edit',
-            // ),
-          ],
-        ),
-        child: Container(
-          color: theme.canvasColor,
-          child: ListTile(
-            leading: data.isIncome
-                ? const Icon(
-                    FinFlowIcons.arrow_circle_up,
-                    color: FinFlowTheme.greenColor,
-                  )
-                : const Icon(
-                    FinFlowIcons.arrow_circle_down,
-                    color: FinFlowTheme.redColor,
-                  ),
-            title: Text('₹${data.amount}'),
-            subtitle: RichText(
-                text: TextSpan(
-                    style: txt12Blue,
-                    text: "${data.category} :",
-                    children: [
-                  TextSpan(text: data.description, style: txt12Grey)
-                ])),
-            trailing: Text(convertDate(data.date!)),
-          ),
         ),
       ),
     );
