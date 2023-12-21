@@ -12,6 +12,7 @@ import 'package:printing/printing.dart';
 import '../../domain/entities/transaction_entity.dart';
 
 class PdfApi {
+  static final id = DateTime.now().millisecondsSinceEpoch ~/ 10000;
   static Future<File> generate(PdfParam param) async {
     try {
       final image =
@@ -34,7 +35,7 @@ class PdfApi {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               pw.Image(image, height: PdfPageFormat.cm * 1.5),
-              pw.Text("SL No: ${DateTime.now().millisecondsSinceEpoch ~/ 1000}")
+              pw.Text("SL No: $id")
             ],
           ),
           pw.Text(
@@ -67,9 +68,7 @@ class PdfApi {
         ],
       ));
 
-      return saveDocument(
-          name: 'fin_flow_report_${DateTime.now().millisecondsSinceEpoch}.pdf',
-          pdf: pdf);
+      return saveDocument(name: 'fin_flow_report_$id.pdf', pdf: pdf);
     } catch (e) {
       throw DataException(e.toString());
     }
