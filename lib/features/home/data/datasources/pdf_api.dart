@@ -9,8 +9,6 @@ import 'package:pdf/widgets.dart' as pw;
 import 'package:pdf/widgets.dart';
 import 'package:printing/printing.dart';
 
-import '../../domain/entities/transaction_entity.dart';
-
 class PdfApi {
   static Future<File> generate(PdfParam param) async {
     try {
@@ -53,6 +51,15 @@ class PdfApi {
             children: [
               pw.Text("To date: $toDt"),
             ],
+          ),
+          pw.Container(
+            height: 20,
+            decoration: BoxDecoration(color: PdfColor.fromHex('#F3F3F3FF')),
+            child: pw.Row(
+              children: [
+                pw.Text('Test'),
+              ],
+            ),
           ),
           pw.Divider(),
           ...List.generate(100, (index) => pw.Text("$index"))
