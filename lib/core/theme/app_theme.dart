@@ -63,5 +63,5 @@ class FinFlowTheme {
   static const Color greenColor = Colors.green;
   static const Color redColor = Colors.red;
   static const Color darkGrey = Color.fromARGB(255, 107, 107, 107);
-  final a = Color(0xFFF3F3F3);
+  final a = Color(0xFF9E9E9E);
 }

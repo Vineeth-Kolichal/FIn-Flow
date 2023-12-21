@@ -62,10 +62,8 @@ class PdfApi {
           pw.Divider(),
           if (income.isNotEmpty)
             transactionListWidget(transactions: income, isIncome: true),
-          if (income.isNotEmpty) pw.Divider(),
           if (expenses.isNotEmpty)
             transactionListWidget(transactions: expenses, isIncome: false),
-          if (expenses.isNotEmpty) pw.Divider(),
         ],
       ));
 
@@ -103,18 +101,22 @@ pw.Widget transactionListWidget({
   required List<TransactionEntity> transactions,
   required bool isIncome,
 }) {
+  double total = 0.0;
+  for (var element in transactions) {
+    total = total + element.amount;
+  }
   return pw.Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       pw.Text(
-        isIncome ? "Income" : "Expences",
+        isIncome ? "Income" : "Expenses",
         style: pw.TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.bold,
           color: PdfColor.fromHex(isIncome ? "#4CAF50FF" : "#F44336FF"),
         ),
       ),
-      pw.Divider(),
+      pw.Divider(color: PdfColor.fromHex("#9E9E9EFF")),
       pw.Container(
         height: 20,
         decoration: BoxDecoration(
@@ -184,9 +186,26 @@ pw.Widget transactionListWidget({
           ],
         ),
       ),
-      pw.Divider(),
-      ...List.generate(transactions.length,
-          (index) => transactionRow(index: index, entity: transactions[index]))
+      pw.Divider(color: PdfColor.fromHex("#9E9E9EFF")),
+      ...List.generate(
+        transactions.length,
+        (index) => transactionRow(index: index, entity: transactions[index]),
+      ),
+      pw.Divider(color: PdfColor.fromHex("#9E9E9EFF")),
+      pw.Row(children: [
+        pw.Spacer(),
+        pw.Text('Total:'),
+        pw.SizedBox(
+          width: 50,
+          child: pw.Text("$total",
+              style: pw.TextStyle(
+                color: PdfColor.fromHex(isIncome ? "#4CAF50FF" : "#F44336FF"),
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+              )),
+        )
+      ]),
+      pw.Divider(color: PdfColor.fromHex("#9E9E9EFF")),
     ],
   );
 }
