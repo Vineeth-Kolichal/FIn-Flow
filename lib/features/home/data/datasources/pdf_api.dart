@@ -196,14 +196,15 @@ pw.Widget transactionListWidget({
         pw.Spacer(),
         pw.Text('Total:'),
         pw.SizedBox(
-          width: 50,
+          // width: 50,
           child: pw.Text("$total",
               style: pw.TextStyle(
                 color: PdfColor.fromHex(isIncome ? "#4CAF50FF" : "#F44336FF"),
                 fontSize: 14,
                 fontWeight: FontWeight.bold,
               )),
-        )
+        ),
+        pw.SizedBox(width: 20),
       ]),
       pw.Divider(color: PdfColor.fromHex("#9E9E9EFF")),
     ],
@@ -213,71 +214,69 @@ pw.Widget transactionListWidget({
 pw.Container transactionRow(
     {required int index, required TransactionEntity entity}) {
   return pw.Container(
-      height: 20,
+      //height: 20,
       decoration: BoxDecoration(
           color: (index % 2 == 1) ? PdfColor.fromHex('#F3F3F3FF') : null),
-      child: pw.Row(
-        children: [
-          pw.Flexible(
-            flex: 1,
-            child: pw.Center(
-              child: pw.Text(
-                "${index + 1}",
-                style: pw.TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold,
+      child: pw.Padding(
+        padding: const EdgeInsets.symmetric(vertical: 4),
+        child: pw.Row(
+          children: [
+            pw.Flexible(
+              flex: 1,
+              child: pw.Center(
+                child: pw.Text(
+                  "${index + 1}",
+                  style: const pw.TextStyle(
+                    fontSize: 12,
+                  ),
                 ),
               ),
             ),
-          ),
-          pw.Flexible(
-            flex: 2,
-            child: pw.Center(
-              child: pw.Text(
-                DateFormat('dd-MM-yyyy').format(entity.date!),
-                style: pw.TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold,
+            pw.Flexible(
+              flex: 2,
+              child: pw.Center(
+                child: pw.Text(
+                  DateFormat('dd-MM-yyyy').format(entity.date!),
+                  style: const pw.TextStyle(
+                    fontSize: 12,
+                  ),
                 ),
               ),
             ),
-          ),
-          pw.Flexible(
-            flex: 2,
-            child: pw.Center(
-              child: pw.Text(
-                entity.category,
-                style: pw.TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold,
+            pw.Flexible(
+              flex: 2,
+              child: pw.Center(
+                child: pw.Text(
+                  entity.category,
+                  style: const pw.TextStyle(
+                    fontSize: 12,
+                  ),
                 ),
               ),
             ),
-          ),
-          pw.Flexible(
-            flex: 5,
-            child: pw.Center(
-              child: pw.Text(
-                entity.description,
-                style: pw.TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold,
+            pw.Flexible(
+              flex: 5,
+              child: pw.Center(
+                child: pw.Text(
+                  entity.description,
+                  style: const pw.TextStyle(
+                    fontSize: 12,
+                  ),
                 ),
               ),
             ),
-          ),
-          pw.Flexible(
-            flex: 2,
-            child: pw.Center(
-              child: pw.Text(
-                "${entity.amount}",
-                style: pw.TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold,
+            pw.Flexible(
+              flex: 2,
+              child: pw.Center(
+                child: pw.Text(
+                  "${entity.amount}",
+                  style: const pw.TextStyle(
+                    fontSize: 12,
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ));
 }
