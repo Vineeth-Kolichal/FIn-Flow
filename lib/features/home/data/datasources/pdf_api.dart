@@ -9,6 +9,8 @@ import 'package:pdf/widgets.dart' as pw;
 import 'package:pdf/widgets.dart';
 import 'package:printing/printing.dart';
 
+import '../../domain/entities/transaction_entity.dart';
+
 class PdfApi {
   static Future<File> generate(PdfParam param) async {
     try {
@@ -18,6 +20,11 @@ class PdfApi {
       final fromDt = DateFormat('dd-MM-yyyy').format(param.fromDate);
       final toDt = DateFormat('dd-MM-yyyy').format(param.todate);
       final now = DateFormat('dd-MM-yyyy').format(DateTime.now());
+      List<TransactionEntity> income =
+          param.transactions.where((element) => element.isIncome).toList();
+      List<TransactionEntity> expenses =
+          param.transactions.where((element) => !element.isIncome).toList();
+
       final pdf = pw.Document();
 
       pdf.addPage(pw.MultiPage(
@@ -52,17 +59,13 @@ class PdfApi {
               pw.Text("To date: $toDt"),
             ],
           ),
-          pw.Container(
-            height: 20,
-            decoration: BoxDecoration(color: PdfColor.fromHex('#F3F3F3FF')),
-            child: pw.Row(
-              children: [
-                pw.Text('Test'),
-              ],
-            ),
-          ),
           pw.Divider(),
-          ...List.generate(100, (index) => pw.Text("$index"))
+          if (income.isNotEmpty)
+            transactionListWidget(transactions: income, isIncome: true),
+          if (income.isNotEmpty) pw.Divider(),
+          if (expenses.isNotEmpty)
+            transactionListWidget(transactions: expenses, isIncome: false),
+          if (expenses.isNotEmpty) pw.Divider(),
         ],
       ));
 
@@ -94,4 +97,168 @@ class PdfApi {
 
     await OpenFile.open(url);
   }
+}
+
+pw.Widget transactionListWidget({
+  required List<TransactionEntity> transactions,
+  required bool isIncome,
+}) {
+  return pw.Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      pw.Text(
+        isIncome ? "Income" : "Expences",
+        style: pw.TextStyle(
+          fontSize: 14,
+          fontWeight: FontWeight.bold,
+          color: PdfColor.fromHex(isIncome ? "#4CAF50FF" : "#F44336FF"),
+        ),
+      ),
+      pw.Divider(),
+      pw.Container(
+        height: 20,
+        decoration: BoxDecoration(
+            color: PdfColor.fromHex(isIncome ? '#EBFDECFF' : "#FDE0DEFF")),
+        child: pw.Row(
+          children: [
+            pw.Flexible(
+              flex: 1,
+              child: pw.Center(
+                child: pw.Text(
+                  "No",
+                  style: pw.TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+            pw.Flexible(
+              flex: 2,
+              child: pw.Center(
+                child: pw.Text(
+                  "Date",
+                  style: pw.TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+            pw.Flexible(
+              flex: 2,
+              child: pw.Center(
+                child: pw.Text(
+                  "Category",
+                  style: pw.TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+            pw.Flexible(
+              flex: 5,
+              child: pw.Center(
+                child: pw.Text(
+                  "Description",
+                  style: pw.TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+            pw.Flexible(
+              flex: 2,
+              child: pw.Center(
+                child: pw.Text(
+                  "Amount",
+                  style: pw.TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+      pw.Divider(),
+      ...List.generate(transactions.length,
+          (index) => transactionRow(index: index, entity: transactions[index]))
+    ],
+  );
+}
+
+pw.Container transactionRow(
+    {required int index, required TransactionEntity entity}) {
+  return pw.Container(
+      height: 20,
+      decoration: BoxDecoration(
+          color: (index % 2 == 1) ? PdfColor.fromHex('#F3F3F3FF') : null),
+      child: pw.Row(
+        children: [
+          pw.Flexible(
+            flex: 1,
+            child: pw.Center(
+              child: pw.Text(
+                "${index + 1}",
+                style: pw.TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+          pw.Flexible(
+            flex: 2,
+            child: pw.Center(
+              child: pw.Text(
+                DateFormat('dd-MM-yyyy').format(entity.date!),
+                style: pw.TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+          pw.Flexible(
+            flex: 2,
+            child: pw.Center(
+              child: pw.Text(
+                entity.category,
+                style: pw.TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+          pw.Flexible(
+            flex: 5,
+            child: pw.Center(
+              child: pw.Text(
+                entity.description,
+                style: pw.TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+          pw.Flexible(
+            flex: 2,
+            child: pw.Center(
+              child: pw.Text(
+                "${entity.amount}",
+                style: pw.TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ));
 }
